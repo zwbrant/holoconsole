@@ -1,6 +1,7 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 namespace Valve.VR.Extras
 {
@@ -80,6 +81,12 @@ namespace Valve.VR.Extras
         {
             if (PointerClick != null)
                 PointerClick(this, e);
+
+            // if there's a button attached to the target, click it
+            Button targButton = e.target.GetComponent<Button>();
+            if (targButton != null && targButton.interactable)
+                targButton.onClick.Invoke();
+            
         }
 
         public virtual void OnPointerOut(PointerEventArgs e)
@@ -102,6 +109,7 @@ namespace Valve.VR.Extras
             Ray raycast = new Ray(transform.position, transform.forward);
             RaycastHit hit;
             bool bHit = Physics.Raycast(raycast, out hit);
+            
 
             if (previousContact && previousContact != hit.transform)
             {
