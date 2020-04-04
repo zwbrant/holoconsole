@@ -53,7 +53,7 @@ namespace Valorem.HoloHands
                 if (IsHandDetected)
                 {
                     Vector3 vel;
-                    if (CurrentHand.properties.location.TryGetVelocity(out vel))
+                    if (CurrentHand.properties.sourcePose.TryGetVelocity(out vel))
                     {
                         return vel;
                     }
@@ -69,7 +69,7 @@ namespace Valorem.HoloHands
                 if (IsHandDetected)
                 {
                     Vector3 pos;
-                    if (CurrentHand.properties.location.TryGetPosition(out pos))
+                    if (CurrentHand.properties.sourcePose.TryGetPosition(out pos))
                     {
                         return pos;
                     }
@@ -84,20 +84,20 @@ namespace Valorem.HoloHands
 
         public PlayerHands()
         {
-            InteractionManager.SourceLost += InteractionManager_SourceLost;
-            InteractionManager.SourceUpdated += InteractionManager_SourceUpdated;
-            InteractionManager.SourcePressed += InteractionManager_SourcePressed;
-            InteractionManager.SourceReleased += InteractionManager_SourceReleased;
+            //InteractionManager.SourceLost += InteractionManager_SourceLost;
+            //InteractionManager.SourceUpdated += InteractionManager_SourceUpdated;
+            //InteractionManager.SourcePressed += InteractionManager_SourcePressed;
+            //InteractionManager.SourceReleased += InteractionManager_SourceReleased;
 
             PressedSources = new HashSet<UnityEngine.XR.WSA.Input.InteractionSourceKind>();
         }
 
         ~PlayerHands()
         {
-            InteractionManager.SourceLost -= InteractionManager_SourceLost;
-            InteractionManager.SourceUpdated -= InteractionManager_SourceUpdated;
-            InteractionManager.SourcePressed -= InteractionManager_SourcePressed;
-            InteractionManager.SourceReleased -= InteractionManager_SourceReleased;
+            //InteractionManager.SourceLost -= InteractionManager_SourceLost;
+            //InteractionManager.SourceUpdated -= InteractionManager_SourceUpdated;
+            //InteractionManager.SourcePressed -= InteractionManager_SourcePressed;
+            //InteractionManager.SourceReleased -= InteractionManager_SourceReleased;
         }
 
         public Vector3 WorldToViewportPoint(Vector3 position)

@@ -59,7 +59,7 @@ namespace Valorem.HoloHands
         private Vector3 GetHandPosition(uint key)
         {
             Vector3 position;
-            PlayerHands.Instance.VisibleHands[key].properties.location.TryGetPosition(out position);
+            PlayerHands.Instance.VisibleHands[key].properties.sourcePose.TryGetPosition(out position);
             return position;
         }
         private bool IsHandStillActive(Hand checkedHand)

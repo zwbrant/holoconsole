@@ -14,7 +14,7 @@ namespace Valorem.HoloConsole
         public const string OpenPerformanceViewKeyword = "Open Performance tab";
         public const string OpenConsoleViewKeyword = "Open Console tab";
 
-        public void OnSpeechKeywordRecognized(SpeechKeywordRecognizedEventData eventData)
+        public void OnSpeechKeywordRecognized(SpeechEventData eventData)
         {
             switch (eventData.RecognizedText)
             {
