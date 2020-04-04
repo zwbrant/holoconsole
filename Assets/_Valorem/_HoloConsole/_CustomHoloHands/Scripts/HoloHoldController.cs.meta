@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 183d88a6c5c64fa46bad89b99b02b6c5
+timeCreated: 1508539320
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - HoloLensInput: {fileID: 114034643575415656, guid: ae2a4b45cb8bd124cb23ba7c94774863,
+      type: 2}
+  - MixedRealityInput: {fileID: 114665652149614488, guid: a1c62d8cdb1d91b458b11421b7c4e0ce,
+      type: 2}
+  - MouseInput: {fileID: 114259789321392648, guid: 2382fba36eca00846b36693212b80840,
+      type: 2}
+  - GlobalTransform: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
