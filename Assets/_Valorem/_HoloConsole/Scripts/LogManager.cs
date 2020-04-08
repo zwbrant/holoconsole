@@ -85,7 +85,6 @@ namespace Valorem.HoloConsole
             base.Awake();
             gameObject.SetActive(EnabledAtStart);
             _enabledItemsCount = 0;
-            Application.logMessageReceived += LogReceivedHandler;
             InitializeReferences();
         }
 
@@ -101,7 +100,7 @@ namespace Valorem.HoloConsole
             if (HoloHoldController == null)
             {
                 HoloHoldController = Camera.main.GetComponent<HoloHoldController>();
-                if (HoloHoldController == null) { Debug.LogError("No HoloHoldController found on main camera"); }
+                //if (HoloHoldController == null) { Debug.LogError("No HoloHoldController found on main camera"); }
             }
             if (TabSystem == null) { TabSystem = GetComponentInChildren<TabController>(); }
             if (PerformanceView == null) { PerformanceView = GameObject.Find("PerformanceView"); }
@@ -132,6 +131,8 @@ namespace Valorem.HoloConsole
                     LogColor.r * contrastMulti,
                     LogColor.g * contrastMulti,
                     LogColor.b * contrastMulti);
+
+            Application.logMessageReceived += LogReceivedHandler;
         }
 
         // Update is called once per frame
@@ -174,8 +175,9 @@ namespace Valorem.HoloConsole
 
                 if (!_followCamera)
                 {
-                    if (RectTransform.sizeDelta != _dettachedSize) RectTransform.sizeDelta = _dettachedSize;
-                    StartCoroutine(SlerpToDetached(Camera.main.transform.TransformPoint(Vector3.forward * 7f)));
+                    if (RectTransform.sizeDelta != _dettachedSize)
+                        RectTransform.sizeDelta = _dettachedSize;
+                    StartCoroutine(SlerpToDetached(Camera.main.transform.TransformPoint(Vector3.forward * 5f)));
                 }
                 else
                 {

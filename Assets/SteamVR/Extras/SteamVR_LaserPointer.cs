@@ -2,6 +2,8 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 
 namespace Valve.VR.Extras
 {
@@ -9,8 +11,11 @@ namespace Valve.VR.Extras
     {
         public SteamVR_Behaviour_Pose pose;
 
-        //public SteamVR_Action_Boolean interactWithUI = SteamVR_Input.__actions_default_in_InteractUI;
         public SteamVR_Action_Boolean interactWithUI = SteamVR_Input.GetBooleanAction("InteractUI");
+        public Transform LaserHit;
+        [Range(-10f, 10f)]
+        public float LaserHitGap = .03f;
+        public bool SetLaserColor = true;
 
         public bool active = true;
         public Color color;
@@ -23,7 +28,14 @@ namespace Valve.VR.Extras
         public Transform reference;
         public event PointerEventHandler PointerIn;
         public event PointerEventHandler PointerOut;
-        public event PointerEventHandler PointerClick;
+
+        public event PointerEventHandler PointerDown;
+        public event PointerEventHandler PointerUp;
+        public event PointerDragHandler PointerDrag;
+
+        public GameObject DragContactPoint;
+        public Transform DraggedObject = null;
+        public Vector3 LocalDragContactPoint;
 
         Transform previousContact = null;
 
@@ -39,7 +51,7 @@ namespace Valve.VR.Extras
                 Debug.LogError("No ui interaction action has been set on this component.", this);
 
 
-            holder = new GameObject();
+            holder = new GameObject("holder");
             holder.transform.parent = this.transform;
             holder.transform.localPosition = Vector3.zero;
             holder.transform.localRotation = Quaternion.identity;
@@ -49,6 +61,13 @@ namespace Valve.VR.Extras
             pointer.transform.localScale = new Vector3(thickness, thickness, 100f);
             pointer.transform.localPosition = new Vector3(0f, 0f, 50f);
             pointer.transform.localRotation = Quaternion.identity;
+
+            DragContactPoint = new GameObject("DragContactPoint");
+            DragContactPoint.transform.parent = holder.transform;
+            DragContactPoint.transform.localPosition = Vector3.zero;
+            DragContactPoint.transform.localRotation = Quaternion.identity;
+            DragContactPoint.SetActive(false);
+
             BoxCollider collider = pointer.GetComponent<BoxCollider>();
             if (addRigidBody)
             {
@@ -69,32 +88,127 @@ namespace Valve.VR.Extras
             Material newMaterial = new Material(Shader.Find("Unlit/Color"));
             newMaterial.SetColor("_Color", color);
             pointer.GetComponent<MeshRenderer>().material = newMaterial;
+
+            if (LaserHit != null && SetLaserColor)
+            {
+                var laserColor = new Color(color.r, color.g, color.b, 1f);
+
+                LaserHit.GetComponent<SpriteRenderer>().color = laserColor;
+
+                var lights = LaserHit.GetComponentsInChildren<Light>();
+                for (int i = 0; i < lights.Length; i++)
+                    lights[i].color = laserColor;
+            }
         }
 
         public virtual void OnPointerIn(PointerEventArgs e)
         {
             if (PointerIn != null)
                 PointerIn(this, e);
-        }
+            IFocusable
+            ExecuteEvents.Execute<Focusable>(e.target, null, (x, y) => x.f);
 
-        public virtual void OnPointerClick(PointerEventArgs e)
-        {
-            if (PointerClick != null)
-                PointerClick(this, e);
-
-            // if there's a button attached to the target, click it
-            Button targButton = e.target.GetComponent<Button>();
-            if (targButton != null && targButton.interactable)
-                targButton.onClick.Invoke();
-            
         }
 
         public virtual void OnPointerOut(PointerEventArgs e)
         {
             if (PointerOut != null)
                 PointerOut(this, e);
+
         }
 
+
+        bool rBodyWasKinematic = false;
+        public virtual void OnPointerDown(PointerEventArgs e)
+        {
+            if (PointerDown != null)
+                PointerDown(this, e);
+
+
+            // start dragging
+            if (e.target != null)
+            {
+                DraggedObject = (e.target.name == "TranslateSlider") ? e.target.parent : e.target;
+
+                DragContactPoint.transform.position = e.contactPoint;
+                LocalDragContactPoint = DraggedObject.InverseTransformPoint(e.contactPoint);
+                DragContactPoint.SetActive(true);
+
+                var rBody = DraggedObject.GetComponent<Rigidbody>();
+                if (rBody != null)
+                {
+                    rBodyWasKinematic = rBody.isKinematic;
+                    rBody.isKinematic = true;
+                }
+
+            }
+        }
+
+        public virtual void OnPointerUp(PointerEventArgs e)
+        {
+            if (PointerUp != null)
+                PointerUp(this, e);
+
+            // release dragged object
+            if (DraggedObject != null)
+            {
+                var rBody = DraggedObject.GetComponent<Rigidbody>();
+                if (rBody != null)
+                {
+                    rBody.isKinematic = (rBodyWasKinematic) ? true : false;
+                    rBodyWasKinematic = false;
+                }
+
+                LocalDragContactPoint = Vector3.zero;
+                DragContactPoint.SetActive(false);
+                DraggedObject = null;
+            }
+
+            if (e.target != null)
+            {
+                // if there's a button attached to the target, click it
+                Button targButton = e.target.GetComponent<Button>();
+                if (targButton != null && targButton.interactable)
+                    targButton.onClick.Invoke();
+
+                
+            }
+
+        }
+
+        public virtual void OnDrag(PointerEventArgs pArgs, PointerDragArgs dArgs)
+        {
+            if (PointerDrag != null)
+                PointerDrag(this, pArgs, dArgs);
+
+            // manually translate the target with the pointer
+            var movementPoint = DraggedObject.TransformPoint(LocalDragContactPoint);
+
+            Vector3 globalizedOffset = DraggedObject.TransformVector(LocalDragContactPoint);
+
+
+            Vector3 newPosition = Vector3.Lerp(movementPoint, DragContactPoint.transform.position, .5f * Time.deltaTime * 20f);
+            newPosition -= globalizedOffset;
+
+            DraggedObject.position = newPosition;
+
+            //Debug.DrawLine(holder.transform.position, movementPoint);
+            //Debug.DrawLine(DraggedObject.position, DraggedObject.position + globalizedOffset, Color.green);
+        }
+
+        public void UpdateLaserHit(bool bHit, RaycastHit hit)
+        {
+            if (bHit)
+                LaserHit.gameObject.SetActive(true);
+            else
+            {
+                LaserHit.gameObject.SetActive(false);
+                return;
+            }
+
+            LaserHit.position = hit.point + (hit.normal * LaserHitGap);
+            LaserHit.LookAt(hit.point + hit.normal);
+        }
 
         private void Update()
         {
@@ -109,7 +223,7 @@ namespace Valve.VR.Extras
             Ray raycast = new Ray(transform.position, transform.forward);
             RaycastHit hit;
             bool bHit = Physics.Raycast(raycast, out hit);
-            
+
 
             if (previousContact && previousContact != hit.transform)
             {
@@ -140,14 +254,19 @@ namespace Valve.VR.Extras
                 dist = hit.distance;
             }
 
-            if (bHit && interactWithUI.GetStateUp(pose.inputSource))
+
+
+            if (interactWithUI.GetStateUp(pose.inputSource))
             {
-                PointerEventArgs argsClick = new PointerEventArgs();
-                argsClick.fromInputSource = pose.inputSource;
-                argsClick.distance = hit.distance;
-                argsClick.flags = 0;
-                argsClick.target = hit.transform;
-                OnPointerClick(argsClick);
+                PointerEventArgs argsUp = new PointerEventArgs();
+                argsUp.fromInputSource = pose.inputSource;
+                argsUp.flags = 0;
+                if (bHit)
+                {
+                    argsUp.distance = hit.distance;
+                    argsUp.target = hit.transform;
+                }
+                OnPointerUp(argsUp);
             }
 
             if (interactWithUI != null && interactWithUI.GetState(pose.inputSource))
@@ -161,8 +280,45 @@ namespace Valve.VR.Extras
                 pointer.GetComponent<MeshRenderer>().material.color = color;
             }
             pointer.transform.localPosition = new Vector3(0f, 0f, dist / 2f);
+
+            // laser hit
+            if (LaserHit != null)
+                UpdateLaserHit(bHit, hit);
+
+            if (interactWithUI.GetStateDown(pose.inputSource))
+            {
+                PointerEventArgs argsDown = new PointerEventArgs();
+                argsDown.fromInputSource = pose.inputSource;
+                argsDown.distance = hit.distance;
+                argsDown.flags = 0;
+                argsDown.target = hit.transform;
+                argsDown.contactPoint = hit.point;
+                OnPointerDown(argsDown);
+            }
+
+            if (DraggedObject != null)
+            {
+
+                PointerEventArgs args = new PointerEventArgs();
+                args.fromInputSource = pose.inputSource;
+                args.flags = 0;
+                if (bHit)
+                {
+                    args.distance = hit.distance;
+                    args.target = hit.transform;
+                }
+
+                PointerDragArgs argsDrag = new PointerDragArgs();
+                argsDrag.draggedObject = DraggedObject;
+                //argsDrag.movementDelta = 
+                OnDrag(args, argsDrag);
+            }
+
+
         }
     }
+
+
 
     public struct PointerEventArgs
     {
@@ -170,7 +326,15 @@ namespace Valve.VR.Extras
         public uint flags;
         public float distance;
         public Transform target;
+        public Vector3 contactPoint;
+    }
+
+    public struct PointerDragArgs
+    {
+        public Transform draggedObject;
+        public Vector3 movementDelta;
     }
 
     public delegate void PointerEventHandler(object sender, PointerEventArgs e);
+    public delegate void PointerDragHandler(object sender, PointerEventArgs pArgs, PointerDragArgs dArgs);
 }
