@@ -134,6 +134,7 @@ namespace Valorem.HoloConsole
                     LogColor.b * contrastMulti);
 
             Application.logMessageReceived += LogReceivedHandler;
+            TestLogs(30);
         }
 
         // Update is called once per frame
@@ -257,7 +258,7 @@ namespace Valorem.HoloConsole
         {
             if (verticalAxis == 0f) { return; }
             Vector2 newPos = Content.anchoredPosition;
-            newPos.y = Mathf.Clamp(newPos.y + (-verticalAxis * 140f), 0, Content.sizeDelta.y - ViewPort.rect.height);
+            newPos.y = Mathf.Clamp(newPos.y + (-verticalAxis * 30f * ScrollSensitivity), 0, Content.sizeDelta.y - ViewPort.rect.height);
             Content.anchoredPosition = newPos;
             CheckBounderies();
         }
@@ -567,6 +568,19 @@ namespace Valorem.HoloConsole
                 Content.anchoredPosition = new Vector2(Content.anchoredPosition.x, newY);
                 CheckBounderies();
                 yield return new WaitForEndOfFrame();
+            }
+        }
+
+        public void TestLogs(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                if (i % 3 == 2)
+                    Debug.Log("Test Log");
+                if (i % 3 == 1)
+                    Debug.LogWarning("Test Warning");
+                if (i % 3 == 0)
+                    Debug.LogError("Test Error");
             }
         }
     }
