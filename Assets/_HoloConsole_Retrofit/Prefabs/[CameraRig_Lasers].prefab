@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &453850016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 453850017}
+  m_Layer: 0
+  m_Name: TrackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &453850017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453850016}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.15, y: 2.51, z: 40}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7908054813347391004}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1262977608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16,18 +46,18 @@ MonoBehaviour:
   interactWithUI:
     actionPath: /actions/default/in/InteractUI
     needsReinit: 0
-  LaserHit: {fileID: 0}
-  LaserHitGap: 0.03
+  LaserHit: {fileID: 5229267691194758155}
+  LaserHitGap: 0.01
   SetLaserColor: 1
   active: 1
   color: {r: 1, g: 0.2216981, b: 0.75696695, a: 0}
   thickness: 0.002
-  clickColor: {r: 1, g: 1, b: 1, a: 1}
+  clickColor: {r: 1, g: 0.22352943, b: 0.7568628, a: 1}
   holder: {fileID: 0}
   pointer: {fileID: 0}
   addRigidBody: 0
   reference: {fileID: 0}
-  DragContactPoint: {fileID: 0}
+  DraggingPoint: {fileID: 0}
   DraggedObject: {fileID: 0}
   LocalDragContactPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &1577848937
@@ -46,18 +76,18 @@ MonoBehaviour:
   interactWithUI:
     actionPath: /actions/default/in/InteractUI
     needsReinit: 0
-  LaserHit: {fileID: 0}
-  LaserHitGap: 0.03
+  LaserHit: {fileID: 6977751945591907167}
+  LaserHitGap: 0.01
   SetLaserColor: 1
   active: 1
-  color: {r: 1, g: 0.2216981, b: 0.75696695, a: 0}
+  color: {r: 0, g: 1, b: 0.0789547, a: 0}
   thickness: 0.002
-  clickColor: {r: 1, g: 1, b: 1, a: 1}
+  clickColor: {r: 0, g: 1, b: 0.0789547, a: 1}
   holder: {fileID: 0}
   pointer: {fileID: 0}
   addRigidBody: 0
   reference: {fileID: 0}
-  DragContactPoint: {fileID: 0}
+  DraggingPoint: {fileID: 0}
   DraggedObject: {fileID: 0}
   LocalDragContactPoint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6409860409120410480
@@ -71,6 +101,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LaserHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181756569237421945, guid: 80451cfe68c14c84fad4191b77c2f082,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1181756569237421947, guid: 80451cfe68c14c84fad4191b77c2f082,
         type: 3}
@@ -129,6 +164,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80451cfe68c14c84fad4191b77c2f082, type: 3}
+--- !u!4 &5229267691194758155 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1181756569237421947, guid: 80451cfe68c14c84fad4191b77c2f082,
+    type: 3}
+  m_PrefabInstance: {fileID: 6409860409120410480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7904160436396697130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,6 +287,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5fb0ca93b55ef4b8d54b512b103341, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &7908054813347391004 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4000013889601590, guid: 4d293c8e162f3874b982baadd71153d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7904160436396697130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8120981037630790692
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -257,6 +304,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LaserHit
+      objectReference: {fileID: 0}
+    - target: {fileID: 1181756569237421945, guid: 80451cfe68c14c84fad4191b77c2f082,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1181756569237421947, guid: 80451cfe68c14c84fad4191b77c2f082,
         type: 3}
@@ -315,3 +367,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80451cfe68c14c84fad4191b77c2f082, type: 3}
+--- !u!4 &6977751945591907167 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1181756569237421947, guid: 80451cfe68c14c84fad4191b77c2f082,
+    type: 3}
+  m_PrefabInstance: {fileID: 8120981037630790692}
+  m_PrefabAsset: {fileID: 0}

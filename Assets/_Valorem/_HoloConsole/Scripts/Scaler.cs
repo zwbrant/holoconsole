@@ -39,10 +39,10 @@ namespace Valorem.HoloConsole
             //gr.ManipulationStartedEvent += OnManipulationStarted;
             //gr.ManipulationStartedEvent += OnManipulationUpdated;
             HoloHold.MovementUpdate += HoldMovementUpdate;
-            _multiplier = LogManager.Instance.ScaleSensitivity * 35f;
+            _multiplier = LogManager.Instance.ScaleSensitivity * .022f;
         }
 
-        private void HoldMovementUpdate(Vector3 movementDelta)
+        public void HoldMovementUpdate(Vector3 movementDelta)
         {
             LogManager.Instance.ResizeConsole((Vector2)movementDelta * _multiplier);
         }

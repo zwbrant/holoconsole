@@ -50,7 +50,15 @@
       "type": "boolean"
     },
     {
-      "name": "/actions/default/in/TouchpadTouch",
+      "name": "/actions/default/in/ToggleConsole",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/ToggleConsoleFollow",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/ScrollConsole",
       "type": "vector2"
     },
     {

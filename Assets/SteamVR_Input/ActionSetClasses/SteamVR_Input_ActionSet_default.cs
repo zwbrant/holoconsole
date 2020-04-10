@@ -105,11 +105,27 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Vector2 TouchpadTouch
+        public virtual SteamVR_Action_Boolean ToggleConsole
         {
             get
             {
-                return SteamVR_Actions.default_TouchpadTouch;
+                return SteamVR_Actions.default_ToggleConsole;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean ToggleConsoleFollow
+        {
+            get
+            {
+                return SteamVR_Actions.default_ToggleConsoleFollow;
+            }
+        }
+        
+        public virtual SteamVR_Action_Vector2 ScrollConsole
+        {
+            get
+            {
+                return SteamVR_Actions.default_ScrollConsole;
             }
         }
         

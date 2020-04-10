@@ -52,6 +52,7 @@ namespace Valorem.HoloConsole
         public TabController TabSystem;
         public GameObject PerformanceView;
         public GameObject ConsoleView;
+        public BoxCollider CanvasCollider;
 
         [Header("Log Type Sprites")]
         public Sprite LogSprite;
@@ -116,7 +117,7 @@ namespace Valorem.HoloConsole
             _enabledItems = new LinkedList<LogItem>();
             _disabledItems = new Queue<LogItem>();
 
-            RectTransform.sizeDelta = AttachedSize;
+            SetConsoleSize(AttachedSize);
             _previousConsoleWidth = RectTransform.rect.width;
             Content.sizeDelta = new Vector2(0f, ViewPort.rect.height);
             _dettachedSize = AttachedSize;
@@ -176,14 +177,15 @@ namespace Valorem.HoloConsole
                 if (!_followCamera)
                 {
                     if (RectTransform.sizeDelta != _dettachedSize)
-                        RectTransform.sizeDelta = _dettachedSize;
-                    StartCoroutine(SlerpToDetached(Camera.main.transform.TransformPoint(Vector3.forward * 5f)));
+                        SetConsoleSize(_dettachedSize);
+                    StartCoroutine(SlerpToDetached(Camera.main.transform.TransformPoint(Vector3.forward * 3.75f)));
                 }
                 else
                 {
                     if (_dettachedSize != Vector2.zero)
                         _dettachedSize = RectTransform.sizeDelta;
-                    if (RectTransform.sizeDelta != AttachedSize) RectTransform.sizeDelta = AttachedSize;
+                    if (RectTransform.sizeDelta != AttachedSize)
+                        SetConsoleSize(AttachedSize);
                     UpdateContentHeight();
                     StopAllCoroutines();
                 }
@@ -223,12 +225,17 @@ namespace Valorem.HoloConsole
                 }
                 float x = Mathf.Clamp(RectTransform.sizeDelta.x + sizeChange.x, MinWidth, MaxWidth);
                 float y = Mathf.Clamp(RectTransform.sizeDelta.y - sizeChange.y, MinHeight, MaxHeight);
-                RectTransform.sizeDelta = new Vector2(x, y);
+                SetConsoleSize(new Vector2(x, y));
                 _previousConsoleWidth = RectTransform.rect.width;
                 UpdateContentHeight();
                 CheckBounderies();
-
             }
+        }
+
+        public void SetConsoleSize(Vector2 size)
+        {
+            CanvasCollider.size = size;
+            RectTransform.sizeDelta = size;
         }
 
         public void ClearLog()
@@ -297,9 +304,9 @@ namespace Valorem.HoloConsole
             newItem.Initialize();
 
             // setup HoloHold component with existing HandManager
-            HoloHold holoHold = newItem.GetComponent<HoloHold>();
-            holoHold.SetHandManager(HoloHoldController.HandManager);
-            holoHold.SetHoloSelect(HoloHoldController);
+            //HoloHold holoHold = newItem.GetComponent<HoloHold>();
+            //holoHold.SetHandManager(HoloHoldController.HandManager);
+            //holoHold.SetHoloSelect(HoloHoldController);
 
             newItem.gameObject.SetActive(isActive);
             newItem.indexInLog = indexInLog;

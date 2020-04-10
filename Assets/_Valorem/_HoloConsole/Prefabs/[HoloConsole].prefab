@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 224490244922722894}
   - component: {fileID: 222373898145252288}
   - component: {fileID: 114452047652414022}
+  - component: {fileID: 8954594280340216690}
   m_Layer: 5
   m_Name: Frame
   m_TagString: Untagged
@@ -149,6 +150,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!65 &8954594280340216690
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107678157712642}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 960, y: 640, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1132101752339350
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,7 +1240,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1399997971300710}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ea88c3d40650b54ea0dc7861008715c, type: 3}
   m_Name: 
@@ -1404,7 +1418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b7c14c4baeeefb488149d39cb37a84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxYValue: 80
+  MaxYValue: 120
   LineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   AxisColor: {r: 1, g: 1, b: 1, a: 1}
   AxisIncrementColor: {r: 1, g: 1, b: 1, a: 1}
@@ -1429,9 +1443,10 @@ GameObject:
   - component: {fileID: 114635597868748336}
   - component: {fileID: 114858020664680808}
   - component: {fileID: 114716314149926726}
+  - component: {fileID: 6110208860510725880}
   m_Layer: 5
   m_Name: '[HoloConsole]'
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1443,7 +1458,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493345896092210}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 5.2}
   m_LocalScale: {x: 0.0019201727, y: 0.0019201711, z: 0.0019201711}
   m_Children:
@@ -1540,7 +1555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnabledAtStart: 1
   AttachedSize: {x: 860, y: 600}
-  FollowCamAtStart: 0
+  FollowCamAtStart: 1
   ShowLogs: 1
   ShowWarnings: 1
   ShowErrors: 1
@@ -1565,6 +1580,7 @@ MonoBehaviour:
   TabSystem: {fileID: 114131470755506242}
   PerformanceView: {fileID: 1412624807646148}
   ConsoleView: {fileID: 1440553423957704}
+  CanvasCollider: {fileID: 8954594280340216690}
   LogSprite: {fileID: 21300000, guid: bfbd7aec0851f754d9ad7b3789b9484f, type: 3}
   ErrorSprite: {fileID: 21300000, guid: 5c38757525ec27f41802d9e6b71eb511, type: 3}
   WarningSprite: {fileID: 21300000, guid: 735c45851d3f64d4cbac81b2d7b6de00, type: 3}
@@ -1580,7 +1596,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe0e2f5b9266d274780b2b88ebddf563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LocalCamPositionTarget: {x: -2.38, y: 1.28, z: 9.4}
+  TargetTransform: {fileID: 0}
+  LocalCamPositionTarget: {x: -1.82, y: 1.18, z: 3}
   SlerpSpeed: 7
 --- !u!114 &114858020664680808
 MonoBehaviour:
@@ -1610,6 +1627,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SamplingIntervalSeconds: 0.8
   SampleRecordSize: 15
+--- !u!114 &6110208860510725880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493345896092210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05a1fdb8f23f5f459537353fc5bcd18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Console: {fileID: 114971118313260420}
+  InputSource: 0
+  ConsoleFollow:
+    actionPath: /actions/default/in/ToggleConsoleFollow
+    needsReinit: 0
+  ConsoleToggle:
+    actionPath: /actions/default/in/ToggleConsole
+    needsReinit: 0
 --- !u!1 &1628858244632744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,7 +2388,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889549994343354}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ea88c3d40650b54ea0dc7861008715c, type: 3}
   m_Name: 

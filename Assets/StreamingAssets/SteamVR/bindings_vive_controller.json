@@ -4,6 +4,10 @@
    "app_key" : "application.generated.unity.newunityproject.exe",
    "bindings" : {
       "/actions/buggy" : {
+         "chords" : [],
+         "haptics" : [],
+         "poses" : [],
+         "skeleton" : [],
          "sources" : [
             {
                "inputs" : {
@@ -245,25 +249,65 @@
             },
             {
                "inputs" : {
-                  "position" : {
-                     "output" : "/actions/default/in/touchpadtouch"
+                  "click" : {
+                     "output" : "/actions/default/in/toggleconsole"
                   }
                },
-               "mode" : "trackpad",
+               "mode" : "button",
+               "path" : "/user/hand/left/input/application_menu"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/toggleconsole"
+                  }
+               },
+               "mode" : "button",
+               "path" : "/user/hand/right/input/application_menu"
+            },
+            {
+               "inputs" : {
+                  "click" : {
+                     "output" : "/actions/default/in/toggleconsolefollow"
+                  }
+               },
+               "mode" : "button",
                "path" : "/user/hand/left/input/trackpad"
             },
             {
                "inputs" : {
-                  "position" : {
-                     "output" : "/actions/default/in/touchpadtouch"
+                  "click" : {
+                     "output" : "/actions/default/in/toggleconsolefollow"
                   }
                },
-               "mode" : "trackpad",
+               "mode" : "button",
+               "path" : "/user/hand/right/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "scroll" : {
+                     "output" : "/actions/default/in/scrollconsole"
+                  }
+               },
+               "mode" : "scroll",
+               "path" : "/user/hand/left/input/trackpad"
+            },
+            {
+               "inputs" : {
+                  "scroll" : {
+                     "output" : "/actions/default/in/scrollconsole"
+                  }
+               },
+               "mode" : "scroll",
                "path" : "/user/hand/right/input/trackpad"
             }
          ]
       },
       "/actions/platformer" : {
+         "chords" : [],
+         "haptics" : [],
+         "poses" : [],
+         "skeleton" : [],
          "sources" : [
             {
                "inputs" : {
@@ -307,7 +351,7 @@
    "category" : "steamvr_input",
    "controller_type" : "vive_controller",
    "description" : "",
-   "name" : "dog",
+   "name" : "HoloConsole",
    "options" : {},
    "simulated_actions" : []
 }

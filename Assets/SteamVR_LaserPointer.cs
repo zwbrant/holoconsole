@@ -3,7 +3,8 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using HoloToolkit.Unity.InputModule;
+using Valorem.HoloConsole;
 
 namespace Valve.VR.Extras
 {
@@ -33,9 +34,10 @@ namespace Valve.VR.Extras
         public event PointerEventHandler PointerUp;
         public event PointerDragHandler PointerDrag;
 
-        public GameObject DragContactPoint;
+        public GameObject DraggingPoint;
         public Transform DraggedObject = null;
         public Vector3 LocalDragContactPoint;
+        Scaler currScaler;
 
         Transform previousContact = null;
 
@@ -62,12 +64,12 @@ namespace Valve.VR.Extras
             pointer.transform.localPosition = new Vector3(0f, 0f, 50f);
             pointer.transform.localRotation = Quaternion.identity;
 
-            DragContactPoint = new GameObject("DragContactPoint");
-            DragContactPoint.transform.parent = holder.transform;
-            DragContactPoint.transform.localPosition = Vector3.zero;
-            DragContactPoint.transform.localRotation = Quaternion.identity;
-            DragContactPoint.SetActive(false);
-
+            DraggingPoint = new GameObject("DragContactPoint");
+            DraggingPoint.transform.parent = holder.transform;
+            DraggingPoint.transform.localPosition = Vector3.zero;
+            DraggingPoint.transform.localRotation = Quaternion.identity;
+            DraggingPoint.SetActive(false);
+            
             BoxCollider collider = pointer.GetComponent<BoxCollider>();
             if (addRigidBody)
             {
@@ -105,8 +107,8 @@ namespace Valve.VR.Extras
         {
             if (PointerIn != null)
                 PointerIn(this, e);
-            IFocusable
-            ExecuteEvents.Execute<Focusable>(e.target, null, (x, y) => x.f);
+
+            ExecuteEvents.Execute<IFocusable>(e.target.gameObject, null, (x, y) => x.OnFocusEnter());
 
         }
 
@@ -114,6 +116,7 @@ namespace Valve.VR.Extras
         {
             if (PointerOut != null)
                 PointerOut(this, e);
+            ExecuteEvents.Execute<IFocusable>(e.target.gameObject, null, (x, y) => x.OnFocusExit());
 
         }
 
@@ -123,16 +126,15 @@ namespace Valve.VR.Extras
         {
             if (PointerDown != null)
                 PointerDown(this, e);
-
-
-            // start dragging
-            if (e.target != null)
+            
+            // start dragging if the target isn't a button
+            if (e.target != null && !ExecuteEvents.CanHandleEvent<IInputClickHandler>(e.target.gameObject))
             {
                 DraggedObject = (e.target.name == "TranslateSlider") ? e.target.parent : e.target;
 
-                DragContactPoint.transform.position = e.contactPoint;
+                DraggingPoint.transform.position = e.contactPoint;
                 LocalDragContactPoint = DraggedObject.InverseTransformPoint(e.contactPoint);
-                DragContactPoint.SetActive(true);
+                DraggingPoint.SetActive(true);
 
                 var rBody = DraggedObject.GetComponent<Rigidbody>();
                 if (rBody != null)
@@ -140,6 +142,10 @@ namespace Valve.VR.Extras
                     rBodyWasKinematic = rBody.isKinematic;
                     rBody.isKinematic = true;
                 }
+
+                // save the scaler if we have one, and start tracking the dragger
+                currScaler = DraggedObject.GetComponent<Scaler>();
+                lastDraggerPosition = DraggingPoint.transform.position;
 
             }
         }
@@ -160,40 +166,44 @@ namespace Valve.VR.Extras
                 }
 
                 LocalDragContactPoint = Vector3.zero;
-                DragContactPoint.SetActive(false);
+                DraggingPoint.SetActive(false);
                 DraggedObject = null;
             }
 
             if (e.target != null)
             {
-                // if there's a button attached to the target, click it
-                Button targButton = e.target.GetComponent<Button>();
-                if (targButton != null && targButton.interactable)
-                    targButton.onClick.Invoke();
-
-                
+                var args = new InputClickedEventData(EventSystem.current);
+                ExecuteEvents.Execute<IInputClickHandler>(e.target.gameObject, null, (x, y) => x.OnInputClicked(args));
+                print("Cat");
             }
 
+            currScaler = null;
         }
 
+        Vector3 lastDraggerPosition;
         public virtual void OnDrag(PointerEventArgs pArgs, PointerDragArgs dArgs)
         {
             if (PointerDrag != null)
                 PointerDrag(this, pArgs, dArgs);
 
-            // manually translate the target with the pointer
-            var movementPoint = DraggedObject.TransformPoint(LocalDragContactPoint);
+            if (currScaler != null)
+            {
+                Vector3 dragDelta = Vector3.Normalize(DraggingPoint.transform.position - lastDraggerPosition);
+                currScaler.HoldMovementUpdate(currScaler.transform.InverseTransformVector(dragDelta));
+            } else
+            {
+                // manually translate the target with the pointer
+                var movementPoint = DraggedObject.TransformPoint(LocalDragContactPoint);
+                Vector3 globalizedOffset = DraggedObject.TransformVector(LocalDragContactPoint);
 
-            Vector3 globalizedOffset = DraggedObject.TransformVector(LocalDragContactPoint);
+                Vector3 newPosition = Vector3.Lerp(movementPoint, DraggingPoint.transform.position, .5f * Time.deltaTime * 20f);
+                newPosition -= globalizedOffset;
 
+                DraggedObject.position = newPosition;
 
-            Vector3 newPosition = Vector3.Lerp(movementPoint, DragContactPoint.transform.position, .5f * Time.deltaTime * 20f);
-            newPosition -= globalizedOffset;
-
-            DraggedObject.position = newPosition;
-
-            //Debug.DrawLine(holder.transform.position, movementPoint);
-            //Debug.DrawLine(DraggedObject.position, DraggedObject.position + globalizedOffset, Color.green);
+                //Debug.DrawLine(holder.transform.position, movementPoint);
+                //Debug.DrawLine(DraggedObject.position, DraggedObject.position + globalizedOffset, Color.green);
+            }
         }
 
         public void UpdateLaserHit(bool bHit, RaycastHit hit)
@@ -224,6 +234,7 @@ namespace Valve.VR.Extras
             RaycastHit hit;
             bool bHit = Physics.Raycast(raycast, out hit);
 
+            
 
             if (previousContact && previousContact != hit.transform)
             {
