@@ -34,6 +34,8 @@ namespace Valve.VR.Extras
         public event PointerEventHandler PointerUp;
         public event PointerDragHandler PointerDrag;
 
+        [Range(0f, 1000f)]
+        public float ThrowForce = 100f;
         public GameObject DraggingPoint;
         public Transform DraggedObject = null;
         public Vector3 LocalDragContactPoint;
@@ -161,7 +163,13 @@ namespace Valve.VR.Extras
                 var rBody = DraggedObject.GetComponent<Rigidbody>();
                 if (rBody != null)
                 {
-                    rBody.isKinematic = (rBodyWasKinematic) ? true : false;
+                    if (rBodyWasKinematic)
+                        rBody.isKinematic = true;
+                    else
+                    {
+                        rBody.isKinematic = false;
+                        rBody.AddForce(dragDelta * ThrowForce);
+                    }
                     rBodyWasKinematic = false;
                 }
 
@@ -174,22 +182,23 @@ namespace Valve.VR.Extras
             {
                 var args = new InputClickedEventData(EventSystem.current);
                 ExecuteEvents.Execute<IInputClickHandler>(e.target.gameObject, null, (x, y) => x.OnInputClicked(args));
-                print("Cat");
             }
 
             currScaler = null;
         }
 
         Vector3 lastDraggerPosition;
+        Vector3 dragDelta;
         public virtual void OnDrag(PointerEventArgs pArgs, PointerDragArgs dArgs)
         {
             if (PointerDrag != null)
                 PointerDrag(this, pArgs, dArgs);
 
+            dragDelta = DraggingPoint.transform.position - lastDraggerPosition;
+
             if (currScaler != null)
             {
-                Vector3 dragDelta = Vector3.Normalize(DraggingPoint.transform.position - lastDraggerPosition);
-                currScaler.HoldMovementUpdate(currScaler.transform.InverseTransformVector(dragDelta));
+                currScaler.HoldMovementUpdate(currScaler.transform.InverseTransformVector(Vector3.Normalize(dragDelta)));
             } else
             {
                 // manually translate the target with the pointer
