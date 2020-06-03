@@ -267,6 +267,7 @@ namespace Valve.VR.InteractionSystem
             while (SteamVR.initializedState == SteamVR.InitializedStates.None || SteamVR.initializedState == SteamVR.InitializedStates.Initializing)
                 yield return null;
 
+            SteamVR.enabled = true;
 			if ( SteamVR.instance != null )
 			{
 				ActivateRig( rigSteamVR );
