@@ -71,7 +71,7 @@ namespace HoloToolkit.Unity
             T access = Instance;
             return IsInitialized;
         }
-        
+
         /// <summary>
         /// Base Awake method that sets the Singleton's unique instance.
         /// Called by Unity when initializing a MonoBehaviour.

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using HoloToolkit.Unity;
 using System.Collections;
 using UnityEngine;
 
@@ -58,8 +57,8 @@ namespace HoloToolkit.Unity.Buttons
                 {
                     alphaTarget = value;
                     if (Application.isPlaying)
-                    {                        
-                        if (Mathf.Abs (alpha - alphaTarget) < AlphaThreshold)
+                    {
+                        if (Mathf.Abs(alpha - alphaTarget) < AlphaThreshold)
                         {
                             return;
                         }
@@ -99,8 +98,8 @@ namespace HoloToolkit.Unity.Buttons
                 return targetIconRenderer != null ? targetIconRenderer.GetComponent<MeshFilter>() : null;
             }
         }
-        
-        #if UNITY_EDITOR
+
+#if UNITY_EDITOR
         /// <summary>
         /// Called by CompoundButtonSaveInterceptor
         /// Prevents saving a scene with instanced materials / meshes
@@ -110,10 +109,10 @@ namespace HoloToolkit.Unity.Buttons
             ClearInstancedAssets();
 
             SetIconName(iconName);
-            
+
         }
-        #endif
-        
+#endif
+
         public string IconName
         {
             get
@@ -129,20 +128,24 @@ namespace HoloToolkit.Unity.Buttons
         private void SetIconName(string newName)
         {
             // Avoid exploding if possible
-            if (Profile == null) {
+            if (Profile == null)
+            {
                 return;
             }
 
-            if (targetIconRenderer == null) {
+            if (targetIconRenderer == null)
+            {
                 return;
             }
 
-            if (DisableIcon) {
+            if (DisableIcon)
+            {
                 targetIconRenderer.enabled = false;
                 return;
             }
 
-            if (Profile.IconMaterial == null || Profile.IconMesh == null) {
+            if (Profile.IconMaterial == null || Profile.IconMesh == null)
+            {
                 return;
             }
 
@@ -153,7 +156,7 @@ namespace HoloToolkit.Unity.Buttons
                 instantiatedMaterial.name = Profile.IconMaterial.name;
             }
             targetIconRenderer.sharedMaterial = instantiatedMaterial;
-            
+
             // Instantiate our local mesh now, if we don't have one
             if (instantiatedMesh == null)
             {
@@ -178,7 +181,7 @@ namespace HoloToolkit.Unity.Buttons
                 targetIconRenderer.enabled = false;
                 iconName = newName;
                 return;
-            }            
+            }
 
             // Moment of truth - try to get our icon
             if (!Profile.GetIcon(newName, targetIconRenderer, IconMeshFilter, true))
@@ -301,8 +304,10 @@ namespace HoloToolkit.Unity.Buttons
 
 #if UNITY_EDITOR
         [UnityEditor.CustomEditor(typeof(CompoundButtonIcon))]
-        public class CustomEditor : MRTKEditor {
-            protected override void DrawCustomFooter() {
+        public class CustomEditor : MRTKEditor
+        {
+            protected override void DrawCustomFooter()
+            {
                 CompoundButtonIcon iconButton = (CompoundButtonIcon)target;
                 if (iconButton != null && iconButton.Profile != null)
                 {

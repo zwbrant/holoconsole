@@ -168,7 +168,7 @@ namespace HoloToolkit.Unity.Collections
 
             for (int i = 0; i < NodeList.Count; i++)
             {
-                if (NodeList[i].transform == null || (IgnoreInactiveTransforms && !NodeList[i].transform.gameObject.activeSelf) || NodeList[i].transform.parent==null || !(NodeList[i].transform.parent.gameObject==this.gameObject))
+                if (NodeList[i].transform == null || (IgnoreInactiveTransforms && !NodeList[i].transform.gameObject.activeSelf) || NodeList[i].transform.parent == null || !(NodeList[i].transform.parent.gameObject == this.gameObject))
                 {
                     emptyNodes.Add(NodeList[i]);
                 }
@@ -239,8 +239,9 @@ namespace HoloToolkit.Unity.Collections
         /// <summary>
         /// Internal function for laying out all the children when UpdateCollection is called.
         /// </summary>
-        private void LayoutChildren() {
-        
+        private void LayoutChildren()
+        {
+
             int cellCounter = 0;
             float startOffsetX;
             float startOffsetY;
@@ -253,7 +254,7 @@ namespace HoloToolkit.Unity.Collections
             startOffsetY = (Rows * 0.5f) * CellHeight;
 
             cellCounter = 0;
-            
+
             // First start with a grid then project onto surface
             switch (LayoutType)
             {
@@ -288,7 +289,8 @@ namespace HoloToolkit.Unity.Collections
 
             }
 
-            switch (SurfaceType) {
+            switch (SurfaceType)
+            {
                 case SurfaceTypeEnum.Plane:
                     for (int i = 0; i < NodeList.Count; i++)
                     {
@@ -341,13 +343,13 @@ namespace HoloToolkit.Unity.Collections
                     // Then use the packer function to shift them into place
                     for (int i = 0; i < NodeList.Count; i++)
                     {
-                        newPos = ScatterMapping (nodeGrid[i], Radius);
+                        newPos = ScatterMapping(nodeGrid[i], Radius);
                         Collider nodeCollider = NodeList[i].transform.GetComponentInChildren<Collider>();
                         if (nodeCollider != null)
                         {
                             // Make the radius the largest of the object's dimensions to avoid overlap
                             Bounds bounds = nodeCollider.bounds;
-                            NodeList[i].Radius = Mathf.Max (Mathf.Max(bounds.size.x, bounds.size.y), bounds.size.z) * 0.5f;
+                            NodeList[i].Radius = Mathf.Max(Mathf.Max(bounds.size.x, bounds.size.y), bounds.size.z) * 0.5f;
                         }
                         else
                         {
@@ -363,7 +365,7 @@ namespace HoloToolkit.Unity.Collections
                     // TODO move center, iterations and padding into a public field
                     for (int i = 0; i < 100; i++)
                     {
-                        IterateScatterPacking (NodeList, Radius);
+                        IterateScatterPacking(NodeList, Radius);
                     }
                     break;
             }
@@ -522,7 +524,7 @@ namespace HoloToolkit.Unity.Collections
             return source;
         }
 
-    
+
         /// <summary>
         /// Internal function to pack randomly spaced nodes so they don't overlap
         /// Usually requires about 25 iterations for decent packing
@@ -532,20 +534,21 @@ namespace HoloToolkit.Unity.Collections
         {
             // Sort by closest to center (don't worry about z axis)
             // Use the position of the collection as the packing center
-            nodes.Sort(delegate (CollectionNode circle1, CollectionNode circle2) {
+            nodes.Sort(delegate (CollectionNode circle1, CollectionNode circle2)
+            {
                 float distance1 = (circle1.transform.localPosition).sqrMagnitude;
                 float distance2 = (circle2.transform.localPosition).sqrMagnitude;
                 return distance1.CompareTo(distance2);
             });
-            
+
             Vector3 difference;
             Vector2 difference2D;
 
-           // Move them closer together
-           float radiusPaddingSquared = Mathf.Pow(radiusPadding, 2f);
+            // Move them closer together
+            float radiusPaddingSquared = Mathf.Pow(radiusPadding, 2f);
 
-           for (int i = 0; i < nodes.Count - 1; i++)
-           {
+            for (int i = 0; i < nodes.Count - 1; i++)
+            {
                 for (int j = i + 1; j < nodes.Count; j++)
                 {
                     if (i != j)

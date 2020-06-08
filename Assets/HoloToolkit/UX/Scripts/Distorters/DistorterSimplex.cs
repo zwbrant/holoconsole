@@ -31,12 +31,12 @@ namespace HoloToolkit.Unity.UX
             if (UniformScaleDistort)
             {
                 float scale = (float)(noise.Evaluate(point.x, point.y, point.z, Time.unscaledTime));
-                return Vector3.one  + (Vector3.one * (scale * ScaleDistort));
+                return Vector3.one + (Vector3.one * (scale * ScaleDistort));
             }
             else
             {
                 point = DistortPointInternal(point, strength);
-                return Vector3.Lerp (Vector3.one, Vector3.Scale(Vector3.one, Vector3.one + (point * ScaleDistort)), strength);
+                return Vector3.Lerp(Vector3.one, Vector3.Scale(Vector3.one, Vector3.one + (point * ScaleDistort)), strength);
             }
         }
 

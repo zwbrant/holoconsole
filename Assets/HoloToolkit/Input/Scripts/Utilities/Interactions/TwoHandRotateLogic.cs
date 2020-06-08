@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace HoloToolkit.Unity.InputModule.Utilities.Interactions
 {

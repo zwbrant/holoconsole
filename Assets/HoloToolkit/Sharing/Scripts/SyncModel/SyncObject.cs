@@ -5,13 +5,13 @@
 #define USE_WINRT
 #endif
 
+using HoloToolkit.Unity;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Assertions;
-using HoloToolkit.Unity;
 
 namespace HoloToolkit.Sharing.SyncModel
 {

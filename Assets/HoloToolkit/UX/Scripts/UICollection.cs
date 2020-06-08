@@ -123,7 +123,7 @@ namespace HoloToolkit.UI.Keyboard
         }
 
         private void CollectItems()
-        { 
+        {
             Items.Clear();
 
             foreach (Transform childTransform in transform)

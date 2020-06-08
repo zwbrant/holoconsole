@@ -361,30 +361,30 @@ namespace HoloToolkit.Unity.Buttons
             switch (ButtonState)
             {
                 case ButtonStateEnum.Interactive:
-                {
-                    newState = visible ? ButtonStateEnum.Interactive : ButtonStateEnum.Observation;
-                    break;
-                }
+                    {
+                        newState = visible ? ButtonStateEnum.Interactive : ButtonStateEnum.Observation;
+                        break;
+                    }
                 case ButtonStateEnum.Targeted:
-                {
-                    newState = visible ? ButtonStateEnum.Targeted : ButtonStateEnum.ObservationTargeted;
-                    break;
-                }
+                    {
+                        newState = visible ? ButtonStateEnum.Targeted : ButtonStateEnum.ObservationTargeted;
+                        break;
+                    }
                 case ButtonStateEnum.Observation:
-                {
-                    newState = visible ? ButtonStateEnum.Interactive : ButtonStateEnum.Observation;
-                    break;
-                }
+                    {
+                        newState = visible ? ButtonStateEnum.Interactive : ButtonStateEnum.Observation;
+                        break;
+                    }
                 case ButtonStateEnum.ObservationTargeted:
-                {
-                    newState = visible ? ButtonStateEnum.Targeted : ButtonStateEnum.ObservationTargeted;
-                    break;
-                }
+                    {
+                        newState = visible ? ButtonStateEnum.Targeted : ButtonStateEnum.ObservationTargeted;
+                        break;
+                    }
                 case ButtonStateEnum.Pressed:
-                {
-                    newState = visible ? ButtonStateEnum.Pressed : focused ? ButtonStateEnum.ObservationTargeted : ButtonStateEnum.Observation;
-                    break;
-                }
+                    {
+                        newState = visible ? ButtonStateEnum.Pressed : focused ? ButtonStateEnum.ObservationTargeted : ButtonStateEnum.Observation;
+                        break;
+                    }
             }
 
             OnStateChange(newState);

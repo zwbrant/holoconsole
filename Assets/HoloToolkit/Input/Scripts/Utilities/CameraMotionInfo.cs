@@ -2,10 +2,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 //
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using HoloToolkit.Unity;
 
 namespace HoloToolkit.Unity.InputModule
 {
@@ -69,12 +66,12 @@ namespace HoloToolkit.Unity.InputModule
 
             headMoveDirection = Vector3.Slerp(headMoveDirection, newHeadMoveDirection, dirAdjustRate);
 
-            if(debugDrawHeadDirection)
+            if (debugDrawHeadDirection)
             {
                 Debug.DrawLine(lastHeadPos, lastHeadPos + headMoveDirection * 10f, Color.Lerp(Color.red, Color.green, velP));
             }
 
-            if(debugDrawHeadVelocity)
+            if (debugDrawHeadVelocity)
             {
                 Debug.DrawLine(lastHeadPos, lastHeadPos + headVelocity, Color.yellow);
             }

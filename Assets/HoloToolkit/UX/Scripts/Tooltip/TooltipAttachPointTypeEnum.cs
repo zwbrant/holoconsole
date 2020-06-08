@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace HoloToolkit.UX.ToolTips
+﻿namespace HoloToolkit.UX.ToolTips
 {
     /// <summary>
     /// Used to find a pivot point that is closest to the 

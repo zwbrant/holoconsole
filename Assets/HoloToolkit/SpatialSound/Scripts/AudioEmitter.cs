@@ -149,8 +149,8 @@ namespace HoloToolkit.Unity
         private AudioHighPassFilter highPassFilter;
         private float nativeHighPassCutoffFrequency;
 
-        private void Awake() 
-        {           
+        private void Awake()
+        {
             audioSource = gameObject.GetComponent<AudioSource>();
             initialAudioSourceVolume = audioSource.volume;
 
@@ -164,8 +164,8 @@ namespace HoloToolkit.Unity
             // Preallocate the array that will be used to collect RaycastHit structures.
             hits = new RaycastHit[MaxObjects];
         }
-    
-        private void Update() 
+
+        private void Update()
         {
             DateTime now = DateTime.Now;
 
@@ -236,7 +236,7 @@ namespace HoloToolkit.Unity
                                                 distance,
                                                 Physics.DefaultRaycastLayers,
                                                 QueryTriggerInteraction.Ignore);
-            
+
             for (int i = 0; i < count; i++)
             {
                 IAudioInfluencer influencer = hits[i].collider.gameObject.GetComponentInParent<IAudioInfluencer>();

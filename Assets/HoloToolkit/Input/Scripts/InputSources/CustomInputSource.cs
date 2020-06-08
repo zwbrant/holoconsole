@@ -69,7 +69,7 @@ namespace HoloToolkit.Unity.InputModule
         //Navigation Gesture Emulation vars
         Vector3 NavigatorValues = Vector3.zero; //holds the navigation gesture values [-1,1]
         Vector2 railUsedCurrently = Vector2.one;
-        bool    isNavigatorUsingRails = false;
+        bool isNavigatorUsingRails = false;
 
         public Vector3 ControllerGripPosition;
         public Quaternion ControllerGripRotation;
@@ -521,8 +521,8 @@ namespace HoloToolkit.Unity.InputModule
                     InputManager.Instance.RaiseManipulationUpdated(this, controllerId, currentButtonStates.CumulativeDelta);
 
                     //Navigation Gesture Emulation
-                    NavigatorValues.x = Mathf.Clamp(currentButtonStates.CumulativeDelta.x*5, -1.0f, 1.0f) * railUsedCurrently.x;
-                    NavigatorValues.y = Mathf.Clamp(currentButtonStates.CumulativeDelta.y*5, -1.0f, 1.0f) * railUsedCurrently.y;
+                    NavigatorValues.x = Mathf.Clamp(currentButtonStates.CumulativeDelta.x * 5, -1.0f, 1.0f) * railUsedCurrently.x;
+                    NavigatorValues.y = Mathf.Clamp(currentButtonStates.CumulativeDelta.y * 5, -1.0f, 1.0f) * railUsedCurrently.y;
                     InputManager.Instance.RaiseNavigationUpdated(this, controllerId, NavigatorValues);
                 }
             }

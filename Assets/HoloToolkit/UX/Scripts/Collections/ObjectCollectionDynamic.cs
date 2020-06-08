@@ -38,7 +38,7 @@ namespace HoloToolkit.Unity.Collections
                 localEulerAnglesOnStartup = transform.localEulerAngles;
             }
 
-            public CollectionNodeDynamic (Transform nodeTransform)
+            public CollectionNodeDynamic(Transform nodeTransform)
             {
                 transform = nodeTransform;
                 Name = nodeTransform.name;
@@ -81,7 +81,8 @@ namespace HoloToolkit.Unity.Collections
                 if (DynamicNodeList[i].transform == null || DynamicNodeList[i].transform.parent != collection.transform)
                 {
                     DynamicNodeList.RemoveAt(i);
-                } else
+                }
+                else
                 {
                     DynamicNodeList[i].transform.localPosition = DynamicNodeList[i].localPositionOnStartup;
                     DynamicNodeList[i].transform.localEulerAngles = DynamicNodeList[i].localEulerAnglesOnStartup;
@@ -92,7 +93,7 @@ namespace HoloToolkit.Unity.Collections
         /// <summary>
         /// Manually store collection arrangement
         /// </summary>
-        public void StoreArrangement ()
+        public void StoreArrangement()
         {
             if (collection == null)
                 return;
@@ -144,7 +145,7 @@ namespace HoloToolkit.Unity.Collections
             }
         }
 
-        void OnCollectionUpdated (ObjectCollection collection)
+        void OnCollectionUpdated(ObjectCollection collection)
         {
             StoreArrangement();
         }

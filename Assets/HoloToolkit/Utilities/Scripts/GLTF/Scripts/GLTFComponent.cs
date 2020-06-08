@@ -71,7 +71,7 @@ namespace UnityGLTF
 
                 GLTFStream = null;
             }
-            
+
             IsLoaded = true;
         }
 

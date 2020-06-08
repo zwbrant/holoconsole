@@ -2,8 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using System;
-using System.Collections;
 
 namespace HoloToolkit.Unity.Buttons
 {
@@ -34,7 +32,7 @@ namespace HoloToolkit.Unity.Buttons
         /// Mesh renderer button for mesh button.
         /// </summary>
         private MeshRenderer _renderer;
-        
+
         /// <summary>
         /// Mesh filter object for mesh button.
         /// </summary>
@@ -69,7 +67,7 @@ namespace HoloToolkit.Unity.Buttons
 
             // Set the color from the datum 
             if (_renderer != null)
-                    _renderer.material.color = stateDatum.StateColor;
+                _renderer.material.color = stateDatum.StateColor;
 
             base.OnStateChange(newState);
         }

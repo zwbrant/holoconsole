@@ -3,7 +3,6 @@
 
 using System;
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 
 namespace HoloToolkit.Unity
@@ -13,6 +12,6 @@ namespace HoloToolkit.Unity
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public sealed class FeatureInProgressAttribute : Attribute
     {
-        public  FeatureInProgressAttribute() { }
+        public FeatureInProgressAttribute() { }
     }
 }

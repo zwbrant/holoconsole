@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using HoloToolkit.Unity;
 using UnityEngine;
 
 namespace HoloToolkit.Unity.Buttons
@@ -46,7 +45,8 @@ namespace HoloToolkit.Unity.Buttons
         [UnityEditor.CustomEditor(typeof(ButtonSoundProfile))]
         public class CustomEditor : ProfileInspector
         {
-            protected override void DrawCustomFooter() {
+            protected override void DrawCustomFooter()
+            {
                 ButtonSoundProfile soundProfile = (ButtonSoundProfile)target;
 
                 DrawClipEditor(ref soundProfile.ButtonPressed, ref soundProfile.ButtonPressedVolume, "Button Pressed");
@@ -58,7 +58,8 @@ namespace HoloToolkit.Unity.Buttons
                 DrawClipEditor(ref soundProfile.ButtonObservationTargeted, ref soundProfile.ButtonObservationTargetedVolume, "Button Observation Targeted");
             }
 
-            protected void DrawClipEditor(ref AudioClip clip, ref float volume, string label) {
+            protected void DrawClipEditor(ref AudioClip clip, ref float volume, string label)
+            {
                 UnityEditor.EditorGUILayout.Space();
                 UnityEditor.EditorGUILayout.LabelField(label, UnityEditor.EditorStyles.boldLabel);
                 UnityEditor.EditorGUI.indentLevel++;

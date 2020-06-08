@@ -46,7 +46,7 @@ namespace HoloToolkit.Unity.Buttons
         {
             return null;
         }
-        
+
         /// <summary>
         /// Searches for an icon
         /// If found, the icon texture is applied to the target renderer's material and the icon mesh is applied to the target mesh filter
@@ -60,14 +60,14 @@ namespace HoloToolkit.Unity.Buttons
         public virtual bool GetIcon(string iconName, MeshRenderer targetRenderer, MeshFilter targetMesh, bool useDefaultIfNotFound)
         {
             return false;
-        }        
+        }
 
-        #if UNITY_EDITOR
-        public virtual string DrawIconSelectField (string iconName)
+#if UNITY_EDITOR
+        public virtual string DrawIconSelectField(string iconName)
         {
             iconName = UnityEditor.EditorGUILayout.TextField("Icon name", iconName);
             return iconName;
         }
-        #endif
+#endif
     }
 }

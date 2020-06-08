@@ -69,7 +69,7 @@ namespace HoloToolkit.UX.Dialog
         /// </summary>
         /// <returns></returns>
         protected IEnumerator RunDialogOverTime()
-        {  
+        {
             // Create our buttons and set up our message
             GenerateButtons();
             SetTitleAndMessage();
@@ -180,7 +180,7 @@ namespace HoloToolkit.UX.Dialog
                 Title = title,
                 Message = message
             };
-            
+
             dialog.Launch(result);
             return dialog;
         }

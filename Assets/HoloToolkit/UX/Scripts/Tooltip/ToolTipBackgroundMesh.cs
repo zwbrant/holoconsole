@@ -72,7 +72,7 @@ namespace HoloToolkit.UX.ToolTips
                 localContentSize.x /= meshBounds.size.x;
                 localContentSize.y /= meshBounds.size.y;
                 localContentSize.z = depth;
-               
+
                 //Don't use the mesh bounds for local content since an offset center may be used for design effect
                 if (localContentSize.x > 0 && localContentSize.y > 0)
                 {

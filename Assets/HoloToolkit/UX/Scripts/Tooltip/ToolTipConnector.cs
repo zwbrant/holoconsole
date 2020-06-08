@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using UnityEngine;
 using HoloToolkit.Unity;
+using UnityEngine;
 
 namespace HoloToolkit.UX.ToolTips
 {
@@ -157,7 +157,7 @@ namespace HoloToolkit.UX.ToolTips
             }
             set
             {
-                pivotDistance = Mathf.Min( 2.0f, Mathf.Max( 0,value));
+                pivotDistance = Mathf.Min(2.0f, Mathf.Max(0, value));
             }
         }
 
@@ -168,7 +168,7 @@ namespace HoloToolkit.UX.ToolTips
                 return;
             }
 
-            ManualPivotLocalPosition = transform.InverseTransformPoint (toolTip.PivotPosition);
+            ManualPivotLocalPosition = transform.InverseTransformPoint(toolTip.PivotPosition);
         }
 
         private bool FindToolTip()
@@ -303,7 +303,7 @@ namespace HoloToolkit.UX.ToolTips
             {
                 return;
             }
-            
+
             UpdatePosition();
         }
 
@@ -314,7 +314,7 @@ namespace HoloToolkit.UX.ToolTips
         /// <param name="manualPivotDirection">is the pivot set manually</param>
         /// <param name="relativeTo">Transform that describes the frame of reference of the pivot</param>
         /// <returns>a vector describing the pivot direction in world space</returns>
-        public static Vector3 GetDirectionFromPivotDirection (ConnectorPivotDirection pivotDirection, Vector3 manualPivotDirection, Transform relativeTo)
+        public static Vector3 GetDirectionFromPivotDirection(ConnectorPivotDirection pivotDirection, Vector3 manualPivotDirection, Transform relativeTo)
         {
             Vector3 dir = Vector3.zero;
             switch (pivotDirection)

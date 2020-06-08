@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 //
+using HoloToolkit.Unity.Buttons;
+using HoloToolkit.Unity.UX;
 using System;
 using UnityEngine;
-using HoloToolkit.Unity.UX;
-using HoloToolkit.Unity.Buttons;
 
 namespace HoloToolkit.UX.ToolTips
 {
@@ -407,7 +407,8 @@ namespace HoloToolkit.UX.ToolTips
         /// <summary>
         /// virtual functions
         /// </summary>
-        protected virtual void OnEnable() {
+        protected virtual void OnEnable()
+        {
 
             // Get our line if it exists
             if (toolTipLine == null)
@@ -421,7 +422,8 @@ namespace HoloToolkit.UX.ToolTips
             ShowConnector = showConnector;
         }
 
-        protected virtual void Update() {
+        protected virtual void Update()
+        {
             // Enable / disable our line if it exists
             if (toolTipLine != null)
             {
@@ -430,15 +432,19 @@ namespace HoloToolkit.UX.ToolTips
                 toolTipLine.LastPoint = AttachPointPosition;
             }
 
-            if (IsOn) {
+            if (IsOn)
+            {
                 contentParent.SetActive(true);
                 localAttachPoint = ToolTipUtility.FindClosestAttachPointToAnchor(anchor.transform, contentParent.transform, localAttachPointPositions, attachPointType);
-            } else {
+            }
+            else
+            {
                 contentParent.SetActive(false);
             }
         }
 
-        protected virtual void RefreshLocalContent() {
+        protected virtual void RefreshLocalContent()
+        {
 
             // Set the scale of the pivot
             contentParent.transform.localScale = Vector3.one * contentScale;
@@ -446,7 +452,8 @@ namespace HoloToolkit.UX.ToolTips
             // Set the content using a text mesh by default
             // This function can be overridden for tooltips that use Unity UI
             TextMesh text = label.GetComponent<TextMesh>();
-            if (text != null && !string.IsNullOrEmpty(toolTipText)) {
+            if (text != null && !string.IsNullOrEmpty(toolTipText))
+            {
                 text.fontSize = fontSize;
                 text.text = toolTipText.Trim();
                 text.lineSpacing = 1;
@@ -462,28 +469,35 @@ namespace HoloToolkit.UX.ToolTips
             localAttachPoint = ToolTipUtility.FindClosestAttachPointToAnchor(anchor.transform, contentParent.transform, localAttachPointPositions, attachPointType);
         }
 
-        protected virtual bool EnforceHierarchy() {
+        protected virtual bool EnforceHierarchy()
+        {
 
             Transform pivotTransform = transform.Find("Pivot");
             Transform anchorTransform = transform.Find("Anchor");
-            if (pivotTransform == null || anchorTransform == null) {
-                if (Application.isPlaying) {
+            if (pivotTransform == null || anchorTransform == null)
+            {
+                if (Application.isPlaying)
+                {
                     Debug.LogError("Found error in heirarchy, disabling.");
                     enabled = false;
                 }
                 return false;
             }
             Transform contentParentTransform = pivotTransform.Find("ContentParent");
-            if (contentParentTransform == null) {
-                if (Application.isPlaying) {
+            if (contentParentTransform == null)
+            {
+                if (Application.isPlaying)
+                {
                     Debug.LogError("Found error in heirarchy, disabling.");
                     enabled = false;
                 }
                 return false;
             }
             Transform labelTransform = contentParentTransform.Find("Label");
-            if (labelTransform == null) {
-                if (Application.isPlaying) {
+            if (labelTransform == null)
+            {
+                if (Application.isPlaying)
+                {
                     Debug.LogError("Found error in heirarchy, disabling.");
                     enabled = false;
                 }
@@ -506,13 +520,15 @@ namespace HoloToolkit.UX.ToolTips
             return true;
         }
 
-        #if UNITY_EDITOR
-        private void OnDrawGizmos() {
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
 
             if (Application.isPlaying)
                 return;
 
-            if (!EnforceHierarchy()) {
+            if (!EnforceHierarchy())
+            {
                 return;
             }
 
@@ -524,6 +540,6 @@ namespace HoloToolkit.UX.ToolTips
                 toolTipLine.LastPoint = AttachPointPosition;
             }
         }
-        #endif
+#endif
     }
 }

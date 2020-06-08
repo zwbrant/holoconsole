@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using HoloToolkit.Unity.SpatialMapping;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HoloToolkit.Unity.SpatialMapping;
 
 #if UNITY_WSA
 #if UNITY_2017_2_OR_NEWER

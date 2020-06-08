@@ -30,7 +30,7 @@ namespace HoloToolkit.UX.ToolTips
         private float cornerScale = 1f;
         [SerializeField]
         private ScaleModeEnum scaleMode = ScaleModeEnum.World;
-        
+
         protected override void ContentChange()
         {
             ScaleToFitContent();

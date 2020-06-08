@@ -39,7 +39,7 @@ namespace HoloToolkit.Unity.SpatialMapping
             {
                 IList<Mesh> storedMeshes = MeshSaver.Load(fileName);
 
-                for(int iMesh = 0; iMesh < storedMeshes.Count; iMesh++)
+                for (int iMesh = 0; iMesh < storedMeshes.Count; iMesh++)
                 {
                     AddSurfaceObject(CreateSurfaceObject(
                         mesh: storedMeshes[iMesh],

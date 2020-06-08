@@ -10,7 +10,7 @@ namespace HoloToolkit.Sharing
         public event Action<DiscoveredSystem> DiscoveredEvent;
         public event Action<DiscoveredSystem> LostEvent;
 
-        public override void OnRemoteSystemDiscovered(DiscoveredSystem remoteSystem) 
+        public override void OnRemoteSystemDiscovered(DiscoveredSystem remoteSystem)
         {
             if (this.DiscoveredEvent != null)
             {

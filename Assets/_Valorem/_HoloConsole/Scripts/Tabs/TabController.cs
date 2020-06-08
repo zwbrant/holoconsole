@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -27,12 +26,15 @@ namespace Valorem.HoloConsole
         public Color DeselectedColor;
         public Color DeselectedLabelColor;
         public Color HighlightedColor = Color.yellow;
-        public RectTransform RectTrans {
-            get {
+        public RectTransform RectTrans
+        {
+            get
+            {
                 if (_rectTrans == null) { _rectTrans = GetComponent<RectTransform>(); }
                 return _rectTrans;
             }
-            private set {
+            private set
+            {
                 _rectTrans = value;
             }
         }
@@ -113,7 +115,8 @@ namespace Valorem.HoloConsole
             }
         }
 
-        public void HideTabs() {
+        public void HideTabs()
+        {
             StartCoroutine(LerpTabsHidden());
         }
         public IEnumerator LerpTabsHidden()

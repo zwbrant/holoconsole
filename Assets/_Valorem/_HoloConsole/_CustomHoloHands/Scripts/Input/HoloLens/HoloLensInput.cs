@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -311,7 +310,7 @@ namespace Valorem.HoloHands
                     //}
                     if (PrimaryHand.State == HandState.Hold)
                     {
-                        EventOnTwoHandEnd(false,true);
+                        EventOnTwoHandEnd(false, true);
                         //if (OnTwoHandEnd != null)
                         //{
                         //    OnTwoHandEnd(false, true);

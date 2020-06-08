@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HoloToolkit.Unity.UX
@@ -32,7 +30,7 @@ namespace HoloToolkit.Unity.UX
         [SerializeField]
         private float bulgeStrength = 1f;
 
-        protected override Vector3 DistortPointInternal (Vector3 point, float strength)
+        protected override Vector3 DistortPointInternal(Vector3 point, float strength)
         {
             float distanceToCenter = Vector3.Distance(point, BulgeCenter);
             if (distanceToCenter < bulgeRadius)

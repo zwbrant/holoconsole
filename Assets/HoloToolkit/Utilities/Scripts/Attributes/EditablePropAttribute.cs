@@ -33,7 +33,7 @@ namespace HoloToolkit.Unity
             {
                 case "Boolean":
                     bool boolValue = (bool)prop.GetValue(target, null);
-                    boolValue = EditorGUILayout.Toggle(!string.IsNullOrEmpty (CustomLabel) ? CustomLabel : SplitCamelCase(prop.Name), boolValue);
+                    boolValue = EditorGUILayout.Toggle(!string.IsNullOrEmpty(CustomLabel) ? CustomLabel : SplitCamelCase(prop.Name), boolValue);
                     prop.SetValue(target, boolValue, null);
                     break;
 

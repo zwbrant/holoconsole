@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 //
+using HoloToolkit.Unity.InputModule;
 using System.Collections;
 using UnityEngine;
-using HoloToolkit.Unity.InputModule;
 
 namespace HoloToolkit.UX.ToolTips
 {
@@ -11,7 +11,7 @@ namespace HoloToolkit.UX.ToolTips
     /// Add to any Object to spawn ToolTips on tap or on focus, according to preference
     /// Applies its follow settings to the spawned ToolTip's ToolTipConnector component
     /// </summary>
-    public class ToolTipSpawner : MonoBehaviour , IInputHandler, IPointerSpecificFocusable
+    public class ToolTipSpawner : MonoBehaviour, IInputHandler, IPointerSpecificFocusable
     {
         private enum VanishType
         {
@@ -140,9 +140,9 @@ namespace HoloToolkit.UX.ToolTips
             tappedTime = Time.unscaledTime;
             if (toolTip == null || !toolTip.gameObject.activeSelf)
             {
-                if( appearType == AppearType.AppearOnTap)
+                if (appearType == AppearType.AppearOnTap)
                 {
-                        ShowToolTip();
+                    ShowToolTip();
                 }
             }
         }
@@ -151,7 +151,7 @@ namespace HoloToolkit.UX.ToolTips
         /// this Handler intentionally empty
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnInputUp(InputEventData eventData){}
+        public void OnInputUp(InputEventData eventData) { }
 
         private void ShowToolTip()
         {
@@ -173,7 +173,7 @@ namespace HoloToolkit.UX.ToolTips
                 toolTip.ContentParentTransform.localScale = defaultDimensions;
             }
 
-            if( appearType == AppearType.AppearOnFocusEnter)
+            if (appearType == AppearType.AppearOnFocusEnter)
             {
                 // Wait for the appear delay
                 yield return new WaitForSeconds(appearDelay);
@@ -183,7 +183,7 @@ namespace HoloToolkit.UX.ToolTips
                     yield break;
                 }
             }
-            
+
             toolTip.ToolTipText = ToolTipText;
             toolTip.gameObject.SetActive(true);
             ToolTipConnector connector = toolTip.GetComponent<ToolTipConnector>();
@@ -250,7 +250,7 @@ namespace HoloToolkit.UX.ToolTips
             yield break;
         }
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (Application.isPlaying)
@@ -260,7 +260,8 @@ namespace HoloToolkit.UX.ToolTips
             {
                 Gizmos.color = Color.cyan;
                 Transform relativeTo = null;
-                switch (pivotDirectionOrient) {
+                switch (pivotDirectionOrient)
+                {
                     case ConnectorOrientType.OrientToCamera:
                         relativeTo = Camera.main.transform;//Veil.Instance.HeadTransform;
                         break;
@@ -269,7 +270,8 @@ namespace HoloToolkit.UX.ToolTips
                         relativeTo = (Anchor != null) ? Anchor.transform : transform;
                         break;
                 }
-                if (pivotMode == ConnnectorPivotMode.Automatic) {
+                if (pivotMode == ConnnectorPivotMode.Automatic)
+                {
                     Vector3 targetPosition = (Anchor != null) ? Anchor.transform.position : transform.position;
                     Vector3 toolTipPosition = targetPosition + ToolTipConnector.GetDirectionFromPivotDirection(
                                     pivotDirection,
@@ -277,14 +279,16 @@ namespace HoloToolkit.UX.ToolTips
                                     relativeTo) * pivotDistance;
                     Gizmos.DrawLine(targetPosition, toolTipPosition);
                     Gizmos.DrawWireCube(toolTipPosition, Vector3.one * 0.05f);
-                } else {
+                }
+                else
+                {
                     Vector3 targetPosition = (Anchor != null) ? Anchor.transform.position : transform.position;
-                    Vector3 toolTipPosition = transform.TransformPoint (manualPivotLocalPosition);
+                    Vector3 toolTipPosition = transform.TransformPoint(manualPivotLocalPosition);
                     Gizmos.DrawLine(targetPosition, toolTipPosition);
                     Gizmos.DrawWireCube(toolTipPosition, Vector3.one * 0.05f);
                 }
             }
         }
-        #endif
+#endif
     }
 }

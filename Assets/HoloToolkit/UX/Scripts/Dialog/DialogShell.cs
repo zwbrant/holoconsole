@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using HoloToolkit.Unity;
+using HoloToolkit.UX.Buttons;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
-using HoloToolkit.UX.Buttons;
-using System.Collections.Generic;
-using HoloToolkit.Unity;
 
 #if UNITY_WSA && UNITY_2017_2_OR_NEWER
 using UnityEngine.XR.WSA;

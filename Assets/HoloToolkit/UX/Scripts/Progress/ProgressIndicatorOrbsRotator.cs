@@ -52,7 +52,7 @@ namespace HoloToolkit.UX.Progress
 
             dots = new GameObject[5];
             materials = new Material[dots.Length];
-            
+
             for (int i = 0; i < orbs.Length; ++i)
             {
                 materials[i] = (Material)Instantiate(orbMaterial);

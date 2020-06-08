@@ -15,7 +15,7 @@ namespace HoloToolkit.Unity.UX
         public const float MaxStrengthMultiplier = 1f;
 
         const float GlobalScale = 0.1f;
-        
+
         [Range(MinScaleMultiplier, MaxScaleMultiplier)]
         public float ScaleMultiplier = 0.1f;
         [Range(MinSpeedMultiplier, MaxSpeedMultiplier)]
@@ -28,7 +28,7 @@ namespace HoloToolkit.Unity.UX
 
         protected override Vector3 DistortPointInternal(Vector3 point, float strength)
         {
-            Vector3 wiggly = point;           
+            Vector3 wiggly = point;
             float scale = ScaleMultiplier * GlobalScale;
             wiggly.x = Wiggle(AxisSpeed.x * SpeedMultiplier, (wiggly.x + AxisOffset.x) / scale, AxisStrength.x * StrengthMultiplier);
             wiggly.y = Wiggle(AxisSpeed.y * SpeedMultiplier, (wiggly.y + AxisOffset.y) / scale, AxisStrength.y * StrengthMultiplier);

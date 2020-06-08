@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using HoloToolkit.Unity.InputModule;
 using UnityEngine;
 using UnityEngine.Events;
-using HoloToolkit.Unity.InputModule;
-using System;
 using UnityEngine.UI;
 
 namespace Valorem.HoloConsole

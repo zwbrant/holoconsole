@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using HoloToolkit.Unity.InputModule;
+using System.Collections;
 using UnityEngine;
-using HoloToolkit.Unity.InputModule;
 using UnityEngine.UI;
 
 namespace Valorem.HoloConsole
@@ -116,7 +115,7 @@ namespace Valorem.HoloConsole
         public IEnumerator Collapse()
         {
             BodyText.enabled = false;
-            
+
 
             float _lerpTimer = 0f;
             while (_lerpTimer < .8f)

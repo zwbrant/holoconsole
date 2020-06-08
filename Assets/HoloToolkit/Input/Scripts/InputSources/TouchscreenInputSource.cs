@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace HoloToolkit.Unity.InputModule
 {
@@ -15,7 +15,7 @@ namespace HoloToolkit.Unity.InputModule
     /// </summary>
     public class TouchscreenInputSource : BaseInputSource
     {
-        const float kContactEpsilon = 2.0f/60.0f;
+        const float kContactEpsilon = 2.0f / 60.0f;
 
         [SerializeField]
         [Tooltip("Time in seconds to determine if the contact registers as a tap or a hold")]

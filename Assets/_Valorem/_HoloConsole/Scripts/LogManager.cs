@@ -140,10 +140,11 @@ namespace Valorem.HoloConsole
         // Update is called once per frame
         void Update()
         {
-            if (RectTransform.rect.width == _previousConsoleWidth && _resizing) {
+            if (RectTransform.rect.width == _previousConsoleWidth && _resizing)
+            {
                 SetItemTextComponentsEnabled(true);
                 _resizing = false;
-            } 
+            }
             if (_mouseScrollEnabled) { Scroll(Input.GetAxis("Mouse ScrollWheel")); }
 
             // activating and deactivating the scroll-to-top button
@@ -198,7 +199,8 @@ namespace Valorem.HoloConsole
 
         public void ToggleEnabled() { gameObject.SetActive(!gameObject.activeSelf); }
 
-        public void SwitchToPerformanceView() {
+        public void SwitchToPerformanceView()
+        {
             if (TabSystem.gameObject.activeSelf) { TabSystem.SetSelectedTab(1); }
             else
             {
@@ -207,9 +209,11 @@ namespace Valorem.HoloConsole
             }
 
         }
-        public void SwitchToConsoleView() {
+        public void SwitchToConsoleView()
+        {
             if (TabSystem.gameObject.activeSelf) { TabSystem.SetSelectedTab(0); }
-            else {
+            else
+            {
                 ConsoleView.SetActive(false);
                 PerformanceView.SetActive(true);
             }

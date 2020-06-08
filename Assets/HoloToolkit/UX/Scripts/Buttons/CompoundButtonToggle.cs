@@ -4,7 +4,6 @@
 using System;
 using System.Reflection;
 using UnityEngine;
-using HoloToolkit.Unity;
 
 namespace HoloToolkit.Unity.Buttons
 {
@@ -34,11 +33,14 @@ namespace HoloToolkit.Unity.Buttons
         /// </summary>
         private CompoundButton m_compButton;
 
-        public bool State {
-            get {
+        public bool State
+        {
+            get
+            {
                 return state;
             }
-            set {
+            set
+            {
                 SetState(value);
             }
         }
@@ -49,7 +51,8 @@ namespace HoloToolkit.Unity.Buttons
         /// <summary>
         /// On enable subscribe to button state change on the compound button component
         /// </summary>
-        private void OnEnable() {
+        private void OnEnable()
+        {
             m_compButton = GetComponent<CompoundButton>();
 
             // Force initial state setting
@@ -72,8 +75,9 @@ namespace HoloToolkit.Unity.Buttons
         /// Handle button pressed callback from button
         /// </summary>
         /// <param name="buttonObj"></param>
-        public void ButtonStateChange(ButtonStateEnum newState) {
-            if(newState == ButtonStateEnum.Pressed)
+        public void ButtonStateChange(ButtonStateEnum newState)
+        {
+            if (newState == ButtonStateEnum.Pressed)
             {
                 switch (Behavior)
                 {
@@ -86,7 +90,7 @@ namespace HoloToolkit.Unity.Buttons
 
                 }
             }
-            else if(newState == ButtonStateEnum.ObservationTargeted || newState == ButtonStateEnum.Targeted)
+            else if (newState == ButtonStateEnum.ObservationTargeted || newState == ButtonStateEnum.Targeted)
             {
                 switch (Behavior)
                 {
@@ -100,7 +104,8 @@ namespace HoloToolkit.Unity.Buttons
             }
         }
 
-        private void SetState (bool newState, bool force = false) {
+        private void SetState(bool newState, bool force = false)
+        {
             if ((!force || !Application.isPlaying) && state == newState)
                 return;
 
@@ -116,14 +121,16 @@ namespace HoloToolkit.Unity.Buttons
 #else
             FieldInfo fieldInfo = Target.GetType().GetField("Profile");
 #endif
-            if (fieldInfo == null) {
+            if (fieldInfo == null)
+            {
                 Debug.LogError("Target component had no field type profile in CompoundButtonToggle");
                 return;
             }
 
             fieldInfo.SetValue(Target, state ? OnProfile : OffProfile);
 
-            if (Application.isPlaying) {
+            if (Application.isPlaying)
+            {
                 // Disable, then re-enable the target
                 // This will force the component to update itself
                 ((MonoBehaviour)Target).enabled = false;
@@ -135,19 +142,24 @@ namespace HoloToolkit.Unity.Buttons
         [UnityEditor.CustomEditor(typeof(CompoundButtonToggle))]
         public class CustomEditor : MRTKEditor
         {
-            protected override void DrawCustomFooter() {
+            protected override void DrawCustomFooter()
+            {
                 CompoundButtonToggle toggle = (CompoundButtonToggle)target;
 
                 FieldInfo fieldInfo = null;
                 Type profileType = null;
-                if (toggle.Target == null) {
+                if (toggle.Target == null)
+                {
                     DrawError("Target must be set.");
                     return;
-                } else {
+                }
+                else
+                {
 
                     fieldInfo = toggle.Target.GetType().GetField("Profile");
 
-                    if (fieldInfo == null) {
+                    if (fieldInfo == null)
+                    {
                         DrawError("Target component has no 'Profile' field - are you use this class inherits from ProfileButtonBase?");
                         return;
                     }
@@ -162,29 +174,36 @@ namespace HoloToolkit.Unity.Buttons
                 }
 
                 UnityEditor.EditorGUILayout.LabelField("Select on/off profiles of the type " + profileType.Name);
-                if (toggle.OnProfile == null) {
+                if (toggle.OnProfile == null)
+                {
                     toggle.OnProfile = (ButtonProfile)fieldInfo.GetValue(toggle.Target);
                 }
-                if (toggle.OffProfile == null) {
+                if (toggle.OffProfile == null)
+                {
                     toggle.OffProfile = toggle.OnProfile;
                 }
                 ButtonProfile onProfile = (ButtonProfile)UnityEditor.EditorGUILayout.ObjectField("On Profile", toggle.OnProfile, typeof(ButtonProfile), false);
                 ButtonProfile offProfile = (ButtonProfile)UnityEditor.EditorGUILayout.ObjectField("Off Profile", toggle.OffProfile, typeof(ButtonProfile), false);
-                if (onProfile.GetType() == profileType) {
+                if (onProfile.GetType() == profileType)
+                {
                     toggle.OnProfile = onProfile;
                 }
-                if (offProfile.GetType() == profileType) {
+                if (offProfile.GetType() == profileType)
+                {
                     toggle.OffProfile = offProfile;
                 }
 
-                if (toggle.OnProfile.GetType() != profileType) {
+                if (toggle.OnProfile.GetType() != profileType)
+                {
                     DrawError("On profile object does not match type " + profileType.Name);
                 }
-                if (toggle.OffProfile.GetType() != profileType) {
+                if (toggle.OffProfile.GetType() != profileType)
+                {
                     DrawError("Off profile object does not match type " + profileType.Name);
                 }
 
-                if (onProfile == offProfile) {
+                if (onProfile == offProfile)
+                {
                     DrawWarning("Profiles are the same - toggle will have no effect");
                 }
 

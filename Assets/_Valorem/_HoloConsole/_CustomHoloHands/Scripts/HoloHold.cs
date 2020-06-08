@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Valorem.HoloHands;
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 using UnityEngine.Events;
 
@@ -30,7 +29,7 @@ namespace Valorem.HoloConsole.CustomHoloHands
         public bool TwoHandedScale = false;
 
         [Header("Translate Settings")]
-        public Vector2 XTranslateLimits = new Vector2(Mathf.NegativeInfinity,Mathf.Infinity);
+        public Vector2 XTranslateLimits = new Vector2(Mathf.NegativeInfinity, Mathf.Infinity);
         public Vector2 YTranslateLimits = new Vector2(Mathf.NegativeInfinity, Mathf.Infinity);
         public Vector2 ZTranslateLimits = new Vector2(Mathf.NegativeInfinity, Mathf.Infinity);
 
@@ -114,7 +113,7 @@ namespace Valorem.HoloConsole.CustomHoloHands
         {
             if (!_isHeld) // if it's not already being held,(going from one hadn to two hand will trigger OnHoldEnable() twice)
             {
-                
+
             }
             _isHeld = true;
             if (HoldTransform.GetComponent<Rigidbody>() != null)
@@ -195,13 +194,13 @@ namespace Valorem.HoloConsole.CustomHoloHands
             }
         }
         void GetPlayerData()
-        {        
+        {
             if (_handManager == null)
             {
                 Debug.LogError("HandManager not found for " + name);
                 enabled = false;
                 return;
-            }           
+            }
 
             _headPosition = Camera.main.transform.position;
             _shoulderPosition = Camera.main.transform.position + (Vector3.up * -.15f);
@@ -505,16 +504,16 @@ namespace Valorem.HoloConsole.CustomHoloHands
             YTranslateLimits.y - YTranslateLimits.x,
             ZTranslateLimits.y - ZTranslateLimits.x);
             center = new Vector3(
-                (XTranslateLimits.x + XTranslateLimits.y)/2f,
+                (XTranslateLimits.x + XTranslateLimits.y) / 2f,
                 (YTranslateLimits.x + YTranslateLimits.y) / 2f,
-                (ZTranslateLimits.x + ZTranslateLimits.y)/ 2f);
+                (ZTranslateLimits.x + ZTranslateLimits.y) / 2f);
             if (par != null)
             {
                 //center = par.TransformPoint(center);
                 //center += par.position;
                 Gizmos.matrix = par.localToWorldMatrix;
             }
-            
+
             Gizmos.color = new Color(1, .75f, 0, .25f);
             Gizmos.DrawCube(center, size);
             Gizmos.color = new Color(1, .75f, 0, .75f);

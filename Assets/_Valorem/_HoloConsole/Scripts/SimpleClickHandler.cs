@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using HoloToolkit.Unity.InputModule;
+﻿using HoloToolkit.Unity.InputModule;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Valorem.HoloConsole

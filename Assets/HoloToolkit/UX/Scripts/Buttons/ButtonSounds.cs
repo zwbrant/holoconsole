@@ -28,7 +28,7 @@ namespace HoloToolkit.Unity.Buttons
         private static string lastClipName;
         private static float lastClipTime;
 
-        void Start ()
+        void Start()
         {
             Button button = GetComponent<Button>();
             button.OnButtonCanceled += OnButtonCanceled;
@@ -76,12 +76,12 @@ namespace HoloToolkit.Unity.Buttons
             PlayClip(ButtonPressed);
         }
 
-        void OnButtonReleased (GameObject go)
+        void OnButtonReleased(GameObject go)
         {
             PlayClip(ButtonReleased);
         }
 
-        void PlayClip (AudioClip clip)
+        void PlayClip(AudioClip clip)
         {
             if (clip != null)
             {

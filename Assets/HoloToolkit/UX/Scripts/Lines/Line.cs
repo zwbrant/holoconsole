@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using HoloToolkit.Unity;
 using UnityEngine;
 
 namespace HoloToolkit.Unity.UX
@@ -65,7 +64,8 @@ namespace HoloToolkit.Unity.UX
 
 #if UNITY_EDITOR
         [UnityEditor.CustomEditor(typeof(Line))]
-        public class CustomEditor : LineBaseEditor {
+        public class CustomEditor : LineBaseEditor
+        {
             protected override void DrawCustomSceneGUI()
             {
                 base.DrawCustomSceneGUI();

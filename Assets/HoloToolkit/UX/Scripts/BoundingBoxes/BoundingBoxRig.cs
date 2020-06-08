@@ -278,7 +278,7 @@ namespace HoloToolkit.Unity.UX
                     rigRotateGizmoHandles[i].RotationCoordinateSystem = rotationType;
                     rigRotateGizmoHandles[i].TransformToAffect = objectToBound.transform;
                     rigRotateGizmoHandles[i].AffineType = BoundingBoxGizmoHandleTransformType.Rotation;
-                   
+
                 }
 
                 //set axis to affect
@@ -292,8 +292,8 @@ namespace HoloToolkit.Unity.UX
                 rigRotateGizmoHandles[6].Axis = BoundingBoxGizmoHandleAxisToAffect.Z;
                 rigRotateGizmoHandles[7].Axis = BoundingBoxGizmoHandleAxisToAffect.Z;
 
-                rigRotateGizmoHandles[8].Axis  = BoundingBoxGizmoHandleAxisToAffect.X;
-                rigRotateGizmoHandles[9].Axis  = BoundingBoxGizmoHandleAxisToAffect.X;
+                rigRotateGizmoHandles[8].Axis = BoundingBoxGizmoHandleAxisToAffect.X;
+                rigRotateGizmoHandles[9].Axis = BoundingBoxGizmoHandleAxisToAffect.X;
                 rigRotateGizmoHandles[10].Axis = BoundingBoxGizmoHandleAxisToAffect.X;
                 rigRotateGizmoHandles[11].Axis = BoundingBoxGizmoHandleAxisToAffect.X;
 

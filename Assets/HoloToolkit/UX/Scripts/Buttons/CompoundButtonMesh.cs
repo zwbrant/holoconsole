@@ -3,7 +3,6 @@
 
 using System;
 using UnityEngine;
-using HoloToolkit.Unity;
 
 namespace HoloToolkit.Unity.Buttons
 {
@@ -14,15 +13,15 @@ namespace HoloToolkit.Unity.Buttons
     public class CompoundButtonMesh : ProfileButtonBase<ButtonMeshProfile>
     {
         const float AnimationSpeedMultiplier = 25f;
-        
+
         [Tooltip("Transform that scale and offset will be applied to.")]
         [DropDownComponent]
         public Transform TargetTransform;
-        
+
         [Tooltip("Mesh renderer button for mesh button.")]
         [DropDownComponent]
         public MeshRenderer Renderer;
-        
+
         /// <summary>
         /// Mesh Button State Data Set
         /// </summary>
@@ -80,7 +79,7 @@ namespace HoloToolkit.Unity.Buttons
         /// Called by CompoundButtonSaveInterceptor
         /// Prevents saving a scene with instanced materials
         /// </summary>
-        public void OnWillSaveScene ()
+        public void OnWillSaveScene()
         {
             if (Renderer != null && instantiatedMaterial != null)
             {
@@ -90,7 +89,7 @@ namespace HoloToolkit.Unity.Buttons
         }
 #endif
 
-        protected void Start ()
+        protected void Start()
         {
             Button button = GetComponent<Button>();
             if (button == null)
@@ -98,7 +97,7 @@ namespace HoloToolkit.Unity.Buttons
                 Debug.LogError("No button attached to CompoundButtonMesh in " + name);
                 enabled = false;
                 return;
-            }       
+            }
 
             if (Profile == null)
             {
@@ -126,7 +125,7 @@ namespace HoloToolkit.Unity.Buttons
             }
 
             currentDatum = Profile.ButtonStates[(int)newState];
-                        
+
             // If we're not using smooth states, just set them now
             if (!Profile.SmoothStateChanges)
             {
@@ -160,14 +159,16 @@ namespace HoloToolkit.Unity.Buttons
             UpdateButtonProperties(false);
         }
 
-        protected void OnEnable() {
+        protected void OnEnable()
+        {
             Button button = GetComponent<Button>();
-            if (button != null) {
+            if (button != null)
+            {
                 StateChange(button.ButtonState);
             }
         }
 
-        protected void Update ()
+        protected void Update()
         {
             UpdateButtonProperties(true);
         }
@@ -197,7 +198,8 @@ namespace HoloToolkit.Unity.Buttons
                     TargetTransform.localPosition = Vector3.Lerp(
                         TargetTransform.localPosition, datum.Offset,
                         Time.deltaTime * Profile.AnimationSpeed * AnimationSpeedMultiplier);
-                } else
+                }
+                else
                 {
                     TargetTransform.localScale = datum.Scale;
                     TargetTransform.localPosition = datum.Offset;
@@ -223,7 +225,8 @@ namespace HoloToolkit.Unity.Buttons
                             Color.Lerp(Renderer.material.GetColor(Profile.ColorPropertyName),
                             datum.StateColor,
                             Time.deltaTime * Profile.AnimationSpeed * AnimationSpeedMultiplier));
-                    } else
+                    }
+                    else
                     {
                         Renderer.sharedMaterial.SetColor(
                             Profile.ColorPropertyName,
@@ -239,7 +242,8 @@ namespace HoloToolkit.Unity.Buttons
                             Mathf.Lerp(Renderer.material.GetFloat(Profile.ValuePropertyName),
                             datum.StateValue,
                             Time.deltaTime * Profile.AnimationSpeed * AnimationSpeedMultiplier));
-                    } else
+                    }
+                    else
                     {
                         Renderer.sharedMaterial.SetFloat(Profile.ValuePropertyName, datum.StateValue);
                     }

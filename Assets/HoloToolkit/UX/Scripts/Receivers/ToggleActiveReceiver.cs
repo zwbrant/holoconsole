@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using UnityEngine;
 using HoloToolkit.Unity.InputModule;
+using UnityEngine;
 
 namespace HoloToolkit.Unity.Receivers
 {
@@ -20,7 +20,7 @@ namespace HoloToolkit.Unity.Receivers
         {
             if (Targets.Count > 0)
             {
-                foreach(GameObject target in Targets)
+                foreach (GameObject target in Targets)
                 {
                     target.SetActive(!target.activeSelf);
                 }

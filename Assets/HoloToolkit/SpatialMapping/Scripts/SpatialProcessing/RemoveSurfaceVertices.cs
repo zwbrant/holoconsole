@@ -134,7 +134,7 @@ namespace HoloToolkit.Unity.SpatialMapping
 
                     Mesh mesh = filter.sharedMesh;
                     MeshRenderer meshRenderer = filter.GetComponent<MeshRenderer>();
-                    
+
                     // The mesh renderer bounds are in world space.
                     // If the mesh is null there is nothing to process
                     // If the renderer is null we can't get the renderer bounds

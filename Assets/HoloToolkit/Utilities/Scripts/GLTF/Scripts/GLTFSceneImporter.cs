@@ -1,10 +1,10 @@
+using GLTF;
+using GLTF.Schema;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using GLTF;
-using GLTF.Schema;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Rendering;

@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Valve.VR;
+﻿using UnityEngine;
 using Valorem.HoloConsole;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
+using Valve.VR;
 
 public class HoloConsoleVRInput : MonoBehaviour
 {
@@ -19,13 +15,13 @@ public class HoloConsoleVRInput : MonoBehaviour
 
     }
 
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        if (ConsoleFollow.GetStateUp(InputSource)) 
-            Console.FollowCamera = !Console.FollowCamera;       
+        if (ConsoleFollow.GetStateUp(InputSource))
+            Console.FollowCamera = !Console.FollowCamera;
 
         if (ConsoleToggle.GetStateUp(InputSource))
             Console.gameObject.SetActive(!Console.gameObject.activeSelf);

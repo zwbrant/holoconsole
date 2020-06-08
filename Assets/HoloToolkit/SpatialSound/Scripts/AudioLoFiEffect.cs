@@ -30,7 +30,7 @@ namespace HoloToolkit.Unity
         public AudioLoFiSourceQuality SourceQuality
         {
             get { return sourceQuality; }
-            set { sourceQuality = value;  }
+            set { sourceQuality = value; }
         }
 
         /// <summary>

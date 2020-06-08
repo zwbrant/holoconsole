@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using HoloToolkit.Unity;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,7 +27,7 @@ namespace HoloToolkit.Unity.UX
         [Range(0f, 1f)]
         [Tooltip("Clamps the line's normalized end point. This setting will affect line renderers.")]
         public float LineEndClamp = 1f;
-        
+
         public virtual bool Loops
         {
             get
@@ -48,9 +47,9 @@ namespace HoloToolkit.Unity.UX
         public Vector3 OriginOffset = Vector3.zero;
 
         [Tooltip("The weight of manual up vectors in Velocity rotation mode")]
-        [Range(0f,1f)]
+        [Range(0f, 1f)]
         public float ManualUpVectorBlend = 0f;
-         
+
         [Tooltip("These vectors are used with ManualUpVectorBlend to determine rotation along the line in Velocity rotation mode. Vectors are distributed along the normalized length of the line.")]
         public Vector3[] ManualUpVectors = new Vector3[] { Vector3.up, Vector3.up, Vector3.up };
 
@@ -60,7 +59,7 @@ namespace HoloToolkit.Unity.UX
         [Range(0f, 1f)]
         public float VelocityBlend = 0.5f;
 
-        [Header ("Distortion")]
+        [Header("Distortion")]
         [Tooltip("NormalizedLength mode uses the DistortionStrength curve for distortion strength, Uniform uses UniformDistortionStrength along entire line")]
         public DistortionTypeEnum DistortionType = DistortionTypeEnum.NormalizedLength;
         public AnimationCurve DistortionStrength = AnimationCurve.Linear(0f, 1f, 1f, 1f);
@@ -175,7 +174,7 @@ namespace HoloToolkit.Unity.UX
         /// <param name="worldLength"></param>
         /// <param name="searchResolution"></param>
         /// <returns></returns>
-        public float GetNormalizedLengthFromWorldLength (float worldLength, int searchResolution = 10)
+        public float GetNormalizedLengthFromWorldLength(float worldLength, int searchResolution = 10)
         {
             Vector3 lastPoint = GetUnclampedPoint(0f);
             Vector3 currentPoint = Vector3.zero;
@@ -197,7 +196,7 @@ namespace HoloToolkit.Unity.UX
                 };
             }
 
-            return Mathf.Clamp01 (normalizedLength);
+            return Mathf.Clamp01(normalizedLength);
         }
 
         /// <summary>
@@ -278,7 +277,7 @@ namespace HoloToolkit.Unity.UX
         /// <param name="pointIndex"></param>
         /// <param name="rotationType"></param>
         /// <returns></returns>
-        public Quaternion GetRotation (int pointIndex, RotationTypeEnum rotationType = RotationTypeEnum.None)
+        public Quaternion GetRotation(int pointIndex, RotationTypeEnum rotationType = RotationTypeEnum.None)
         {
             return GetRotation((float)pointIndex / NumPoints, (rotationType != RotationTypeEnum.None) ? rotationType : RotationType);
         }
@@ -291,7 +290,7 @@ namespace HoloToolkit.Unity.UX
         public Vector3 GetPoint(float normalizedLength)
         {
             normalizedLength = ClampedLength(normalizedLength);
-            return DistortPoint (transform.TransformPoint(GetPointInternal(normalizedLength)), normalizedLength);
+            return DistortPoint(transform.TransformPoint(GetPointInternal(normalizedLength)), normalizedLength);
         }
 
         /// <summary>
@@ -310,7 +309,7 @@ namespace HoloToolkit.Unity.UX
         /// </summary>
         /// <param name="pointIndex"></param>
         /// <returns></returns>
-        public Vector3 GetPoint (int pointIndex)
+        public Vector3 GetPoint(int pointIndex)
         {
             if (pointIndex < 0 || pointIndex >= NumPoints)
             {
@@ -326,7 +325,7 @@ namespace HoloToolkit.Unity.UX
         /// </summary>
         /// <param name="pointIndex"></param>
         /// <param name="point"></param>
-        public void SetPoint (int pointIndex, Vector3 point)
+        public void SetPoint(int pointIndex, Vector3 point)
         {
             if (pointIndex < 0 || pointIndex >= NumPoints)
             {
@@ -351,7 +350,7 @@ namespace HoloToolkit.Unity.UX
             distorters.Sort();
         }
 
-        private Vector3 DistortPoint (Vector3 point, float normalizedLength)
+        private Vector3 DistortPoint(Vector3 point, float normalizedLength)
         {
             float strength = UniformDistortionStrength;
             switch (DistortionType)
@@ -378,7 +377,7 @@ namespace HoloToolkit.Unity.UX
 
         private float ClampedLength(float normalizedLength)
         {
-            return Mathf.Lerp(Mathf.Max (LineStartClamp, 0.0001f), Mathf.Min (LineEndClamp, 0.9999f), Mathf.Clamp01(normalizedLength));
+            return Mathf.Lerp(Mathf.Max(LineStartClamp, 0.0001f), Mathf.Min(LineEndClamp, 0.9999f), Mathf.Clamp01(normalizedLength));
         }
 
         #endregion
@@ -408,7 +407,7 @@ namespace HoloToolkit.Unity.UX
 
             Vector3 firstPos = GetPoint(0f);
             Vector3 lastPos = firstPos;
-            Gizmos.color = Color.Lerp (LineBaseEditor.DefaultDisplayLineColor, Color.clear, 0.25f);
+            Gizmos.color = Color.Lerp(LineBaseEditor.DefaultDisplayLineColor, Color.clear, 0.25f);
             int numSteps = 16;
 
             for (int i = 1; i < numSteps; i++)

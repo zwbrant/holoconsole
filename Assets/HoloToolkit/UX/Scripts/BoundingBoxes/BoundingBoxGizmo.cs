@@ -20,11 +20,13 @@ namespace HoloToolkit.Unity.UX
         /// <summary>
         /// Draws any custom gizmo elements around the manipulator's target object
         /// </summary>
-        protected virtual void DrawGizmoObjects() {
+        protected virtual void DrawGizmoObjects()
+        {
             // empty
-        } 
+        }
 
-        protected virtual void LateUpdate() {
+        protected virtual void LateUpdate()
+        {
             DrawGizmoObjects();
         }
     }

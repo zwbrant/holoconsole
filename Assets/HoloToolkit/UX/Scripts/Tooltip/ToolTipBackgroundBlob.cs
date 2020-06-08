@@ -223,7 +223,7 @@ namespace HoloToolkit.UX.ToolTips
             currentRotation.z = velocity.z * 360;
             currentRotation.y = velocity.y * 360;
             currentRotation = rotationTarget.TransformDirection(currentRotation);
-            rotation = Vector3.Lerp (rotation, currentRotation, 1f / blobRotation * Time.deltaTime);
+            rotation = Vector3.Lerp(rotation, currentRotation, 1f / blobRotation * Time.deltaTime);
 
             // Correct the center and size
             inertialContentBounds.center = Vector3.Lerp(inertialContentBounds.center, localContentBounds.center, Time.deltaTime * positionCorrectionStrength);

@@ -454,7 +454,7 @@ namespace HoloToolkit.Unity
         private void CreateEventsDictionary()
         {
             int numEvents = 0;
-            for(int i=0; i<LoadedBanks.Count; i++)
+            for (int i = 0; i < LoadedBanks.Count; i++)
             {
                 numEvents += LoadedBanks[i].Events.Length;
             }

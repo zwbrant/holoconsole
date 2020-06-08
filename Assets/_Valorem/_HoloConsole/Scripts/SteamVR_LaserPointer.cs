@@ -1,9 +1,7 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
-using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using HoloToolkit.Unity.InputModule;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using Valorem.HoloConsole;
 
 namespace Valve.VR.Extras
@@ -71,7 +69,7 @@ namespace Valve.VR.Extras
             DraggingPoint.transform.localPosition = Vector3.zero;
             DraggingPoint.transform.localRotation = Quaternion.identity;
             DraggingPoint.SetActive(false);
-            
+
             BoxCollider collider = pointer.GetComponent<BoxCollider>();
             if (addRigidBody)
             {
@@ -128,7 +126,7 @@ namespace Valve.VR.Extras
         {
             if (PointerDown != null)
                 PointerDown(this, e);
-            
+
             // start dragging if the target isn't a button
             if (e.target != null && !ExecuteEvents.CanHandleEvent<IInputClickHandler>(e.target.gameObject))
             {
@@ -199,7 +197,8 @@ namespace Valve.VR.Extras
             if (currScaler != null)
             {
                 currScaler.HoldMovementUpdate(currScaler.transform.InverseTransformVector(Vector3.Normalize(dragDelta)));
-            } else
+            }
+            else
             {
                 // manually translate the target with the pointer
                 var movementPoint = DraggedObject.TransformPoint(LocalDragContactPoint);
@@ -243,7 +242,7 @@ namespace Valve.VR.Extras
             RaycastHit hit;
             bool bHit = Physics.Raycast(raycast, out hit);
 
-            
+
 
             if (previousContact && previousContact != hit.transform)
             {

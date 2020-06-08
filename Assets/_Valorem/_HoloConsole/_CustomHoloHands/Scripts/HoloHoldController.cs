@@ -5,7 +5,7 @@ namespace Valorem.HoloConsole.CustomHoloHands
 {
     public class HoloHoldController : MonoBehaviour
     {
-        public HandManager HandManager { get { return _handManager;  } }
+        public HandManager HandManager { get { return _handManager; } }
         private HandManager _handManager;
         public HoloLensInput HoloLensInput;
         public MixedRealityInput MixedRealityInput;
@@ -167,7 +167,7 @@ namespace Valorem.HoloConsole.CustomHoloHands
                 Holds[index].SetLocalId(index);
                 Holds[index].SetHandManager(HandManager);
                 Holds[index].SetHoloSelect(this);
-                
+
                 if (holds[index].IsNetworked)
                 {
                     NetworkedHolds[netIndex] = holds[index];
@@ -199,7 +199,7 @@ namespace Valorem.HoloConsole.CustomHoloHands
                 UpdateGizmosStates();
                 UpdateGizmosFadeIns(MyGizmo);
             }
-            
+
             if (MyGizmo.HhState != HoloHoldState.Held &&
                 !GlobalOverrideControl)
             {
@@ -287,7 +287,7 @@ namespace Valorem.HoloConsole.CustomHoloHands
             {
                 CurrentHoloHold.TwoHandStart(false, true);
             }
-            if (MyGizmo.HhState == HoloHoldState.Held && 
+            if (MyGizmo.HhState == HoloHoldState.Held &&
                 CurrentHoloHold != null)
             {
                 //broadcast grab state of 0
@@ -315,7 +315,7 @@ namespace Valorem.HoloConsole.CustomHoloHands
             LayerMask lMask = ~IgnoreLayer;
             //if (Physics.Raycast(transform.position, transform.forward, out hitInfo, Mathf.Infinity, lMask))
             if (Physics.Raycast(transform.position, GazeRotation * Vector3.forward, out hitInfo, Mathf.Infinity, lMask))
-                {
+            {
                 if (hitInfo.transform.GetComponent<HoloHold>())
                 {
                     if (CurrentHoloHold != hitInfo.transform.GetComponent<HoloHold>()) // if its a new holoHold
@@ -337,9 +337,9 @@ namespace Valorem.HoloConsole.CustomHoloHands
                         EndHighlight();
                         CurrentHoloHold = null;
                     }
-                    
+
                 }
-                GazeDistance = hitInfo.distance - .04f ;
+                GazeDistance = hitInfo.distance - .04f;
             }
             else if (CurrentHoloHold)
             {
@@ -376,7 +376,7 @@ namespace Valorem.HoloConsole.CustomHoloHands
                     Vector3 radialPosiiton = CurrentHoloHold.HoldTransform.position;
                     Quaternion radialRotation = Quaternion.LookRotation(transform.position - radialPosiiton, transform.up);
                     Vector3 scale = CurrentHoloHold.HoldTransform.lossyScale;
-                    float radius = Mathf.Sqrt(scale.x * scale.x + scale.y * scale.y + scale.z * scale.z)/2f;
+                    float radius = Mathf.Sqrt(scale.x * scale.x + scale.y * scale.y + scale.z * scale.z) / 2f;
                     //float ditamce = Mathf.Clamp(Vector3.Distance(Camera.main.transform.position, radialPosiiton)- radius,0f,Mathf.Infinity);
                     //HandGizmos.DrawGazeRing(radialPosiiton, radialRotation, radius, myGizmo);
                     //HandGizmos.DrawHoldDots(radialPosiiton, radialRotation, radius, myGizmo);
@@ -387,7 +387,7 @@ namespace Valorem.HoloConsole.CustomHoloHands
                     if (MyGizmo.TranslateOn)
                     {
                         //myGizmo.TranslateFadeIn = 1f;
-                        HandGizmos.DrawTranslate(CurrentHoloHold,transform.position,transform.rotation,scale.x,MyGizmo);
+                        HandGizmos.DrawTranslate(CurrentHoloHold, transform.position, transform.rotation, scale.x, MyGizmo);
                     }
                     if (MyGizmo.RotateOn)
                     {
@@ -406,9 +406,9 @@ namespace Valorem.HoloConsole.CustomHoloHands
             Quaternion diff = Quaternion.Inverse(GazeRotation) * transform.rotation;
             //_gazeRotationInterpolation = Quaternion.Slerp(_gazeRotationInterpolation, diff, Time.deltaTime * 10f);
             //_gazeRotationInterpolation = Quaternion.Slerp(_gazeRotationInterpolation, Quaternion.identity, Time.deltaTime * 30f);
-            _gazeRotationInterpolation = Quaternion.Slerp(_gazeRotationInterpolation, diff, 1f/6f);
+            _gazeRotationInterpolation = Quaternion.Slerp(_gazeRotationInterpolation, diff, 1f / 6f);
             _gazeRotationInterpolation = Quaternion.Slerp(_gazeRotationInterpolation, Quaternion.identity, .5f);
-            GazeRotation = Quaternion.Slerp(GazeRotation, GazeRotation*_gazeRotationInterpolation, Time.deltaTime * 120f);
+            GazeRotation = Quaternion.Slerp(GazeRotation, GazeRotation * _gazeRotationInterpolation, Time.deltaTime * 120f);
 
         }
         void DrawCursor()
@@ -430,7 +430,7 @@ namespace Valorem.HoloConsole.CustomHoloHands
         }
         protected virtual void SendHeadAndCursor()
         {
-            
+
         }
         protected virtual void DrawRemoteGizmos()
         {
@@ -503,7 +503,7 @@ namespace Valorem.HoloConsole.CustomHoloHands
             float fadeInSpeed = 1f;
             float handSpeed = 3f;
             // gaze fadein
-            gizmoStats.GazeFadeIn += Time.deltaTime*fadeInSpeed;
+            gizmoStats.GazeFadeIn += Time.deltaTime * fadeInSpeed;
             gizmoStats.GazeFadeIn = Mathf.Clamp(gizmoStats.GazeFadeIn, 0f, 1f);
             // highlight and hold fadein
             switch (gizmoStats.HhState)

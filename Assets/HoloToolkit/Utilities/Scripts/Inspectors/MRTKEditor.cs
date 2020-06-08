@@ -109,7 +109,8 @@ namespace HoloToolkit.Unity
                 }
 
                 SaveChanges();
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 DrawError(e.ToString());
             }
@@ -1019,7 +1020,7 @@ namespace HoloToolkit.Unity
         #endregion
 
         #region editor prefs
-        
+
         private static void SetEditorPref(string key, bool value)
         {
             EditorPrefs.SetBool(Application.productName + key, value);

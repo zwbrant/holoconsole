@@ -86,7 +86,7 @@ namespace HoloToolkit.Unity
         public bool IsRunning { get; private set; }
 
         private T value;
-        
+
         /// <summary>
         /// Returns the current interpolated value.
         /// </summary>

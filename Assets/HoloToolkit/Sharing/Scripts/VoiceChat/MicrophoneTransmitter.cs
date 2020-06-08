@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using HoloToolkit.Unity;
+using HoloToolkit.Unity.InputModule;
 using System;
 using System.Globalization;
 using System.Threading;
 using UnityEngine;
-using HoloToolkit.Unity;
-using HoloToolkit.Unity.InputModule;
 
 namespace HoloToolkit.Sharing.VoiceChat
 {

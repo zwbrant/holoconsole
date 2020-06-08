@@ -33,7 +33,7 @@ namespace HoloToolkit.Unity.InputModule
         /// </summary>
         protected override void OnEnable()
         {
-            if(ParentTransform == null)
+            if (ParentTransform == null)
             {
                 ParentTransform = transform;
             }
@@ -52,7 +52,7 @@ namespace HoloToolkit.Unity.InputModule
             if (state != CursorStateEnum.Contextual)
             {
                 // Hide all children first
-                for(int i = 0; i < ParentTransform.childCount; i++)
+                for (int i = 0; i < ParentTransform.childCount; i++)
                 {
                     ParentTransform.GetChild(i).gameObject.SetActive(false);
                 }

@@ -1,10 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using UnityEngine;
 using System;
-using System.Collections;
-using HoloToolkit.Unity;
+using UnityEngine;
 
 namespace HoloToolkit.Unity.Buttons
 {
@@ -69,9 +67,9 @@ namespace HoloToolkit.Unity.Buttons
         {
             for (int i = 0; i < ButtonStates.Length; i++)
             {
-                if(ButtonStates[i].Prefab != null)
+                if (ButtonStates[i].Prefab != null)
                 {
-                    if(ButtonStates[i].Prefab.scene.IsValid())
+                    if (ButtonStates[i].Prefab.scene.IsValid())
                     {
                         ButtonStates[i].Instance = Instantiate(ButtonStates[i].Prefab, this.transform.position, this.transform.rotation) as GameObject;
                         ButtonStates[i].Instance.transform.parent = this.transform;
@@ -105,7 +103,7 @@ namespace HoloToolkit.Unity.Buttons
         {
             for (int i = 0; i < ButtonStates.Length; i++)
             {
-                if(ButtonStates[i].Instance != null)
+                if (ButtonStates[i].Instance != null)
                 {
                     ButtonStates[i].Instance.SetActive(i == (int)newState);
                 }

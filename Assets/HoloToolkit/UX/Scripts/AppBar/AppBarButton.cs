@@ -55,18 +55,19 @@ namespace HoloToolkit.Unity.UX
             {
                 // Register the button with its target interactable
                 newTemplate.EventTarget.Registerinteractable(gameObject);
-            } else
+            }
+            else
             {
                 // Register the button with the parent app bar
                 newParentToolBar.Registerinteractable(gameObject);
             }
         }
 
-        protected void OnEnable ()
+        protected void OnEnable()
         {
             Hide();
         }
-        
+
         protected void Update()
         {
             if (!initialized)

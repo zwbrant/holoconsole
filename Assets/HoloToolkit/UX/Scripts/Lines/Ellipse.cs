@@ -9,7 +9,7 @@ namespace HoloToolkit.Unity.UX
     {
         const int MaxPoints = 2048;
 
-        [Header ("Ellipse Settings")]
+        [Header("Ellipse Settings")]
         public int Resolution = 36;
         public Vector2 Radius = new Vector2(1f, 1f);
 

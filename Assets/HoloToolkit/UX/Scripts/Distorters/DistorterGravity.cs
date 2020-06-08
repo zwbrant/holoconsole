@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HoloToolkit.Unity.UX
@@ -26,14 +24,14 @@ namespace HoloToolkit.Unity.UX
         [Range(0f, 10f)]
         public float Radius = 0.5f;
         public AnimationCurve GravityStrength = AnimationCurve.EaseInOut(0, 0, 1, 1);
-        
+
         protected override Vector3 DistortPointInternal(Vector3 point, float strength)
         {
             Vector3 target = WorldCenterOfGravity;
 
-            float normalizedDistance = 1f - Mathf.Clamp01 (Vector3.Distance(point, target) / Radius);
+            float normalizedDistance = 1f - Mathf.Clamp01(Vector3.Distance(point, target) / Radius);
 
-            strength *= GravityStrength.Evaluate (normalizedDistance);
+            strength *= GravityStrength.Evaluate(normalizedDistance);
 
             point.x = Mathf.Lerp(point.x, target.x, Mathf.Clamp01(strength * AxisStrength.x));
             point.y = Mathf.Lerp(point.y, target.y, Mathf.Clamp01(strength * AxisStrength.y));

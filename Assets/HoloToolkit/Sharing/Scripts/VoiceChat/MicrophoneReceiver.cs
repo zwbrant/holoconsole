@@ -1,10 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using HoloToolkit.Unity;
 using System;
 using System.Threading;
 using UnityEngine;
-using HoloToolkit.Unity;
 
 namespace HoloToolkit.Sharing.VoiceChat
 {
@@ -234,7 +234,7 @@ namespace HoloToolkit.Sharing.VoiceChat
             if (sampleRate == 0)
             {
                 // Unused int extendedSampleRate
-                 message.ReadInt32();
+                message.ReadInt32();
             }
 
             try

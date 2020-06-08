@@ -4,9 +4,9 @@
 using UnityEngine.EventSystems;
 
 
-    public interface IFocusable : IEventSystemHandler
-    {
-        void OnFocusEnter();
-        void OnFocusExit();
-    }
+public interface IFocusable : IEventSystemHandler
+{
+    void OnFocusEnter();
+    void OnFocusExit();
+}
 

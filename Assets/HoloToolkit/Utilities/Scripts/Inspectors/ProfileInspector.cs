@@ -16,7 +16,7 @@ namespace HoloToolkit.Unity
     /// It also provides a 'target component' so inspectors can differentiate between local / global editing
     /// See compound button component inspectors for usage examples
     /// </summary>
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     public abstract class ProfileInspector : MRTKEditor
     {
         public Component targetComponent;
@@ -49,5 +49,5 @@ namespace HoloToolkit.Unity
             }
         }
     }
-    #endif
+#endif
 }

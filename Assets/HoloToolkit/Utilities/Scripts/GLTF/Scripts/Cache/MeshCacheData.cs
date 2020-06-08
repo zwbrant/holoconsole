@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using GLTF;
+﻿using GLTF;
+using System.Collections.Generic;
 
 namespace UnityGLTF.Cache
 {

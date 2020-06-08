@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using UnityEngine;
 
 namespace HoloToolkit.Unity
@@ -122,7 +121,7 @@ namespace HoloToolkit.Unity
             // Audio occlusion is performed using a low pass filter.                
             AudioLowPassFilter lowPass = soundEmittingObject.GetComponent<AudioLowPassFilter>();
             if (lowPass == null)
-            { 
+            {
                 lowPass = soundEmittingObject.AddComponent<AudioLowPassFilter>();
             }
             lowPass.enabled = true;

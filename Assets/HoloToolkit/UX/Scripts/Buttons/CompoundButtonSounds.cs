@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using HoloToolkit.Unity;
 using UnityEngine;
 
 namespace HoloToolkit.Unity.Buttons
@@ -13,14 +12,14 @@ namespace HoloToolkit.Unity.Buttons
     public class CompoundButtonSounds : ProfileButtonBase<ButtonSoundProfile>
     {
         const float MinTimeBetweenSameClip = 0.1f;
-        
+
         [SerializeField]
         private AudioSource audioSource;
-        private static string lastClipName; 
+        private static string lastClipName;
         private static float lastClipTime;
         private ButtonStateEnum lastState = ButtonStateEnum.Disabled;
 
-        private void Start ()
+        private void Start()
         {
             Button button = GetComponent<Button>();
             button.OnButtonCanceled += OnButtonCanceled;
@@ -84,12 +83,12 @@ namespace HoloToolkit.Unity.Buttons
             PlayClip(Profile.ButtonPressed, Profile.ButtonPressedVolume);
         }
 
-        private void OnButtonReleased (GameObject go)
+        private void OnButtonReleased(GameObject go)
         {
             PlayClip(Profile.ButtonReleased, Profile.ButtonReleasedVolume);
         }
 
-        private void PlayClip (AudioClip clip, float volume)
+        private void PlayClip(AudioClip clip, float volume)
         {
             if (clip != null)
             {

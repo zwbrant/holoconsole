@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using HoloToolkit.Unity;
 using UnityEngine;
 
 namespace HoloToolkit.Unity.Buttons
@@ -16,12 +15,16 @@ namespace HoloToolkit.Unity.Buttons
         /// Turn off text entirely
         /// </summary>
         [EditableProp]
-        public bool DisableText {
-            get {
+        public bool DisableText
+        {
+            get
+            {
                 return disableText;
             }
-            set {
-                if (disableText != value) {
+            set
+            {
+                if (disableText != value)
+                {
                     disableText = value;
                     UpdateStyle();
                 }
@@ -30,26 +33,34 @@ namespace HoloToolkit.Unity.Buttons
 
         [ShowIfBoolValue("DisableText", false)]
         [TextAreaProp(30)]
-        public string Text {
-            get {
-                if (TextMesh == null) {
+        public string Text
+        {
+            get
+            {
+                if (TextMesh == null)
+                {
                     return string.Empty;
                 }
                 return TextMesh.text;
             }
-            set {
+            set
+            {
                 TextMesh.text = value;
             }
         }
 
         [ShowIfBoolValue("DisableText", false)]
         [RangeProp(0f, 1f)]
-        public float Alpha {
-            get {
+        public float Alpha
+        {
+            get
+            {
                 return alpha;
             }
-            set {
-                if (value != alpha) {
+            set
+            {
+                if (value != alpha)
+                {
                     alpha = value;
                     UpdateStyle();
                 }
@@ -77,7 +88,7 @@ namespace HoloToolkit.Unity.Buttons
         [ShowIfBoolValue("DisableText", false)]
         [Tooltip("Disregard the size in the profile.")]
         public bool OverrideSize = false;
-        
+
         [ShowIfBoolValue("OverrideSize")]
         [ShowIfBoolValue("DisableText", false)]
         [Tooltip("Size to use for override.")]
@@ -138,7 +149,7 @@ namespace HoloToolkit.Unity.Buttons
             }
         }
 
-        private void OnDrawGizmos ()
+        private void OnDrawGizmos()
         {
             UpdateStyle();
         }

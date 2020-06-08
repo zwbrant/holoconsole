@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using HoloToolkit.Unity.InputModule;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using HoloToolkit.Unity.InputModule;
-using Valorem.HoloHands;
 using Valorem.HoloConsole.CustomHoloHands;
 
 namespace Valorem.HoloConsole

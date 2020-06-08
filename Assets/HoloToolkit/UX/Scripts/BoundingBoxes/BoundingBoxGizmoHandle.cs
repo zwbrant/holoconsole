@@ -382,14 +382,14 @@ namespace HoloToolkit.Unity.UX
         {
             inputDownEventData = eventData;
 
-            initialHandPosition     = GetHandPosition(eventData.SourceId);
-            lastHandWorldPos        = initialHandPosition;
-            initialScale            = transformToAffect.localScale;
-            initialPosition         = transformToAffect.position;
-            initialOrientation      = transformToAffect.rotation.eulerAngles;
-            initialRotation         = transformToAffect.rotation;
-            initialHandOrientation  = GetHandOrientation(eventData.SourceId);
-            initialScaleOrigin      = transformToAffect.position - this.transform.position;
+            initialHandPosition = GetHandPosition(eventData.SourceId);
+            lastHandWorldPos = initialHandPosition;
+            initialScale = transformToAffect.localScale;
+            initialPosition = transformToAffect.position;
+            initialOrientation = transformToAffect.rotation.eulerAngles;
+            initialRotation = transformToAffect.rotation;
+            initialHandOrientation = GetHandOrientation(eventData.SourceId);
+            initialScaleOrigin = transformToAffect.position - this.transform.position;
 
             HoloToolkit.Unity.InputModule.InputManager.Instance.PushModalInputHandler(gameObject);
 

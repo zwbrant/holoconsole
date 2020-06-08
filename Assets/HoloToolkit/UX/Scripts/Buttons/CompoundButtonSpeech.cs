@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using UnityEngine;
 using HoloToolkit.Unity.InputModule;
-using HoloToolkit.Unity;
+using UnityEngine;
 
 namespace HoloToolkit.Unity.Buttons
 {
@@ -11,7 +10,7 @@ namespace HoloToolkit.Unity.Buttons
     /// This class will automatically link buttons to speech keywords
     /// (Currently disabled)
     /// </summary>
-    [RequireComponent (typeof(CompoundButton))]
+    [RequireComponent(typeof(CompoundButton))]
     public class CompoundButtonSpeech : MonoBehaviour, ISpeechHandler
     {
         public enum KeywordSourceEnum
@@ -54,10 +53,11 @@ namespace HoloToolkit.Unity.Buttons
         /// </summary>
         private CompoundButtonText m_button_text;
 
-        public void Start ()
+        public void Start()
         {
             // Disable if no microphone devices are found
-            if (Microphone.devices.Length == 0) {
+            if (Microphone.devices.Length == 0)
+            {
                 enabled = false;
                 return;
             }
@@ -113,7 +113,7 @@ namespace HoloToolkit.Unity.Buttons
             if (!gameObject.activeSelf || !enabled)
                 return;
 
-            if(eventData.RecognizedText.Equals(keyWord))
+            if (eventData.RecognizedText.Equals(keyWord))
             {
                 // Send a pressed message to the button through the InputManager
                 m_button.TriggerClicked();
@@ -124,11 +124,13 @@ namespace HoloToolkit.Unity.Buttons
         [UnityEditor.CustomEditor(typeof(CompoundButtonSpeech))]
         public class CustomEditor : MRTKEditor
         {
-            protected override void DrawCustomFooter() {
+            protected override void DrawCustomFooter()
+            {
                 CompoundButtonSpeech speechButton = (CompoundButtonSpeech)target;
 
                 bool microphoneEnabled = UnityEditor.PlayerSettings.WSA.GetCapability(UnityEditor.PlayerSettings.WSACapability.Microphone);
-                if (!microphoneEnabled) {
+                if (!microphoneEnabled)
+                {
                     DrawWarning("Microphone capability not present. Speech recognition will be disabled.");
                     return;
                 }
@@ -136,14 +138,20 @@ namespace HoloToolkit.Unity.Buttons
                 UnityEditor.EditorGUILayout.LabelField("Keyword source", UnityEditor.EditorStyles.miniBoldLabel);
                 speechButton.KeywordSource = (CompoundButtonSpeech.KeywordSourceEnum)UnityEditor.EditorGUILayout.EnumPopup(speechButton.KeywordSource);
                 CompoundButtonText text = speechButton.GetComponent<CompoundButtonText>();
-                switch (speechButton.KeywordSource) {
+                switch (speechButton.KeywordSource)
+                {
                     case CompoundButtonSpeech.KeywordSourceEnum.ButtonText:
                     default:
-                        if (text == null) {
+                        if (text == null)
+                        {
                             DrawError("No CompoundButtonText component found.");
-                        } else if (string.IsNullOrEmpty(text.Text)) {
+                        }
+                        else if (string.IsNullOrEmpty(text.Text))
+                        {
                             DrawWarning("No keyword found in button text.");
-                        } else {
+                        }
+                        else
+                        {
                             UnityEditor.EditorGUILayout.LabelField("Keyword: " + text.Text);
                         }
                         break;
@@ -158,11 +166,13 @@ namespace HoloToolkit.Unity.Buttons
                 }
             }
 
-            private void EnableMicrophone() {
+            private void EnableMicrophone()
+            {
                 UnityEditor.PlayerSettings.WSA.SetCapability(UnityEditor.PlayerSettings.WSACapability.Microphone, true);
             }
 
-            private void AddText() {
+            private void AddText()
+            {
                 CompoundButtonSpeech speechButton = (CompoundButtonSpeech)target;
                 speechButton.gameObject.AddComponent<CompoundButtonText>();
             }

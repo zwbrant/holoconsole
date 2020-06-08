@@ -94,7 +94,7 @@ namespace HoloToolkit.Unity.InputModule
         /// <returns>the full path to the recorded audio file</returns>
         public static string MicStopRecording()
         {
-            StringBuilder builder = new StringBuilder(MAX_PATH); 
+            StringBuilder builder = new StringBuilder(MAX_PATH);
             MicStopRecording(builder);
             return builder.ToString();
         }

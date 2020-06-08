@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Valorem.HoloConsole.CustomHoloHands;
 
 namespace Valorem.HoloHands
@@ -22,7 +20,7 @@ namespace Valorem.HoloHands
             SetUpAnimationCurves();
             SetUpHighlightVerticies();
             SetUpGazeRing();
-            
+
         }
         private static void SetUpAnimationCurves()
         {
@@ -30,7 +28,7 @@ namespace Valorem.HoloHands
             _easeOutCuve = new AnimationCurve();
             _easeInAndOutCurve = new AnimationCurve();
             _bumpCurve = new AnimationCurve();
-            
+
             _keys = new Keyframe[2];
             _keys[0] = new Keyframe(0, 0, 0f, 0f);
             _keys[1] = new Keyframe(1, 1, 1.5f, 0f);
@@ -53,11 +51,11 @@ namespace Valorem.HoloHands
             for (int v = 0; v < numOfVs + 1; v++)
             {
                 angle *= v;
-                float radian = Mathf.Deg2Rad*angle;
+                float radian = Mathf.Deg2Rad * angle;
                 float x = Mathf.Sin(radian);
                 float y = Mathf.Cos(radian);
                 float z = 0;
-                
+
                 _gazeRingVertices[v] = new Vector3(x, y, z);
             }
         }
@@ -125,8 +123,8 @@ namespace Valorem.HoloHands
             verts[0] = -rightDir + upDir + forwardDir + position;
             verts[1] = rightDir + upDir + forwardDir + position;
             verts[2] = rightDir + upDir - forwardDir + position;
-            verts[3] = - rightDir + upDir - forwardDir + position;
-            verts[4] = - rightDir - upDir + forwardDir + position;
+            verts[3] = -rightDir + upDir - forwardDir + position;
+            verts[4] = -rightDir - upDir + forwardDir + position;
             verts[5] = rightDir - upDir + forwardDir + position;
             verts[6] = rightDir - upDir - forwardDir + position;
             verts[7] = -rightDir - upDir - forwardDir + position;
@@ -245,7 +243,7 @@ namespace Valorem.HoloHands
                     angleLeft = 0;
                 }
                 radians = currentAngle * Mathf.Deg2Rad;
-                
+
                 GL.Vertex(archPosition + Mathf.Sin(radians) * rightDir * outerRadius + Mathf.Cos(radians) * upDir * outerRadius);
                 GL.Vertex(archPosition + Mathf.Sin(radians) * rightDir * innerRadius + Mathf.Cos(radians) * upDir * innerRadius);
             }
@@ -261,7 +259,7 @@ namespace Valorem.HoloHands
                     Random.Range(-1f, 1f),
                     Random.Range(-1f, 1f));
             }
-            
+
         }
         public static void DrawHighlight()
         {
@@ -281,11 +279,11 @@ namespace Valorem.HoloHands
 
             Vector3 forwardDir = rot * Vector3.forward;
 
-            Color arcColor = gizmoStats.MainColor * _easeOutCuve.Evaluate( gizmoStats.GazeFadeIn*2f) *.5f;
+            Color arcColor = gizmoStats.MainColor * _easeOutCuve.Evaluate(gizmoStats.GazeFadeIn * 2f) * .5f;
             Color dimColor = gizmoStats.MainColor * _bumpCurve.Evaluate(gizmoStats.GazeFadeIn * 2.5f) * .25f;
 
-            float size = _bumpCurve.Evaluate(gizmoStats.GazeFadeIn*3f);
-            float width = _easeOutCuve.Evaluate(gizmoStats.GazeFadeIn*3f-1f);
+            float size = _bumpCurve.Evaluate(gizmoStats.GazeFadeIn * 3f);
+            float width = _easeOutCuve.Evaluate(gizmoStats.GazeFadeIn * 3f - 1f);
             float spin = _easeInAndOutCurve.Evaluate(gizmoStats.GazeFadeIn * 3f - 2f);
             //Vector3 forwardDir = rotation * Vector3.forward * radius;
 
@@ -334,8 +332,8 @@ namespace Valorem.HoloHands
             {
                 //if (GazeRingVerticies[v].y < .1f && GazeRingVerticies[v].y > -.1f)
                 //{
-                    GL.Vertex(position + rotation * _gazeRingVertices[v] * radius * size);
-                    GL.Vertex(position + rotation * _gazeRingVertices[v + 1] * radius * size);
+                GL.Vertex(position + rotation * _gazeRingVertices[v] * radius * size);
+                GL.Vertex(position + rotation * _gazeRingVertices[v + 1] * radius * size);
                 //}
 
             }
@@ -390,7 +388,7 @@ namespace Valorem.HoloHands
         {
             Color brightColor = new Color(
                 cursorColor.r * .95f,
-                cursorColor.g * .95f, 
+                cursorColor.g * .95f,
                 cursorColor.b * .95f);
             Color dimlightColor = new Color(
                 cursorColor.r * .6f,
@@ -418,7 +416,7 @@ namespace Valorem.HoloHands
                     GL.Vertex(headPosition + forward * cursorDistance + right * cursorSize * .5f * Mathf.Sin((a + 15) * Mathf.Deg2Rad) + up * cursorSize * .5f * Mathf.Cos((a + 15) * Mathf.Deg2Rad));
                 }
             }
-            else 
+            else
             {
 
                 GL.Color(dimlightColor);
@@ -483,7 +481,7 @@ namespace Valorem.HoloHands
             GL.Color(cursorColor);
             GL.Vertex(cursorPosition);
             GL.Color(Color.black);
-            GL.Vertex((headPosition + cursorPosition)/2f);
+            GL.Vertex((headPosition + cursorPosition) / 2f);
             GL.End();
         }
         public static void DrawTranslate(HoloHold holoHold, Vector3 headPosition, Quaternion headRotation, float scale, HoloHoldController.GizmoStats gizmoStats)

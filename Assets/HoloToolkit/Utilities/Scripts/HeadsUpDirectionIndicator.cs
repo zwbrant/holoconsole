@@ -209,16 +209,19 @@ namespace HoloToolkit.Unity
                 if (eDistance > 0.0f)
                 {
                     return FrustumPlanes.Left;
-                } else
+                }
+                else
                 {
                     return FrustumPlanes.Bottom;
                 }
-            } else
+            }
+            else
             {
                 if (eDistance > 0.0f)
                 {
                     return FrustumPlanes.Top;
-                } else
+                }
+                else
                 {
                     return FrustumPlanes.Right;
                 }
@@ -263,7 +266,8 @@ namespace HoloToolkit.Unity
                     (Vector3.Cross(p.normal, rNormal) * q.distance)) / det;
                 intersection = new Ray(rPoint, rNormal);
                 return true;
-            } else
+            }
+            else
             {
                 intersection = new Ray();
                 return false;

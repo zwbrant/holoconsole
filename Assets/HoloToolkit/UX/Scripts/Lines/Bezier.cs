@@ -11,7 +11,8 @@ namespace HoloToolkit.Unity.UX
         [Serializable]
         private struct PointSet
         {
-            public PointSet(float spread) {
+            public PointSet(float spread)
+            {
                 Point1 = Vector3.right * spread * 0.5f;
                 Point2 = Vector3.right * spread * 0.25f;
                 Point3 = Vector3.left * spread * 0.25f;
@@ -28,14 +29,18 @@ namespace HoloToolkit.Unity.UX
         [SerializeField]
         private PointSet points = new PointSet(0.5f);
 
-        public override int NumPoints {
-            get {
+        public override int NumPoints
+        {
+            get
+            {
                 return 4;
             }
         }
 
-        protected override Vector3 GetPointInternal(int pointIndex) {
-            switch (pointIndex) {
+        protected override Vector3 GetPointInternal(int pointIndex)
+        {
+            switch (pointIndex)
+            {
                 case 0:
                     return points.Point1;
 
@@ -53,8 +58,10 @@ namespace HoloToolkit.Unity.UX
             }
         }
 
-        protected override void SetPointInternal(int pointIndex, Vector3 point) {
-            switch (pointIndex) {
+        protected override void SetPointInternal(int pointIndex, Vector3 point)
+        {
+            switch (pointIndex)
+            {
                 case 0:
                     points.Point1 = point;
                     break;
@@ -76,23 +83,27 @@ namespace HoloToolkit.Unity.UX
             }
         }
 
-        protected override Vector3 GetPointInternal(float normalizedDistance) {
+        protected override Vector3 GetPointInternal(float normalizedDistance)
+        {
             return LineUtils.InterpolateBezeirPoints(points.Point1, points.Point2, points.Point3, points.Point4, normalizedDistance);
         }
 
-        protected override float GetUnclampedWorldLengthInternal() {
+        protected override float GetUnclampedWorldLengthInternal()
+        {
             // Crude approximation
             // TODO optimize
             float distance = 0f;
             Vector3 last = GetUnclampedPoint(0f);
-            for (int i = 1; i < 10; i++) {
+            for (int i = 1; i < 10; i++)
+            {
                 Vector3 current = GetUnclampedPoint((float)i / 10);
                 distance += Vector3.Distance(last, current);
             }
             return distance;
         }
 
-        protected override Vector3 GetUpVectorInternal(float normalizedLength) {
+        protected override Vector3 GetUpVectorInternal(float normalizedLength)
+        {
             // Bezier up vectors just use transform up
             return transform.up;
         }
@@ -101,7 +112,8 @@ namespace HoloToolkit.Unity.UX
         [UnityEditor.CustomEditor(typeof(Bezier))]
         public class CustomEditor : LineBaseEditor
         {
-            protected override void DrawCustomSceneGUI() {
+            protected override void DrawCustomSceneGUI()
+            {
                 base.DrawCustomSceneGUI();
 
                 Bezier line = (Bezier)target;

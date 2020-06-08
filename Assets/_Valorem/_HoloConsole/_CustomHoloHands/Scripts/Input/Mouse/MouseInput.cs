@@ -1,34 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 using Valorem.HoloHands;
 
-public class MouseInput : HandManager {
-	
-	// Update is called once per frame
-	void Update () {
-        
-	    if (Input.GetMouseButton(0))
-	    {
-	        if (PrimaryHand.Active)
-	        {
-	            UpdateHand(PrimaryHand);
-	        }
-	        else
-	        {
-	            AvtivateHand(PrimaryHand);
-	        }
-	    }
-	    else
-	    {
-	        if (PrimaryHand.Active)
-	        {
-	            DeactivateHand(PrimaryHand);
+public class MouseInput : HandManager
+{
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (Input.GetMouseButton(0))
+        {
+            if (PrimaryHand.Active)
+            {
+                UpdateHand(PrimaryHand);
+            }
+            else
+            {
+                AvtivateHand(PrimaryHand);
+            }
+        }
+        else
+        {
+            if (PrimaryHand.Active)
+            {
+                DeactivateHand(PrimaryHand);
                 PrimaryHand = new Hand();
-	            PrimaryHand.IsPrimary = true;
-	        }
-	    }
+                PrimaryHand.IsPrimary = true;
+            }
+        }
     }
 
     void AvtivateHand(Hand hand)
@@ -60,9 +59,9 @@ public class MouseInput : HandManager {
             if (Time.time - hand.LastTapTime > MaxTappedTime)
             {
                 hand.State = HandState.Hold;
-                EventOnAirHoldStart(hand.DoubleTapped,hand.IsPrimary);
+                EventOnAirHoldStart(hand.DoubleTapped, hand.IsPrimary);
             }
-            else if(Vector3.Distance(hand.TappedPosition,hand.Position) > MaxTappedDistance)
+            else if (Vector3.Distance(hand.TappedPosition, hand.Position) > MaxTappedDistance)
             {
                 hand.State = HandState.Hold;
                 EventOnAirHoldStart(hand.DoubleTapped, hand.IsPrimary);

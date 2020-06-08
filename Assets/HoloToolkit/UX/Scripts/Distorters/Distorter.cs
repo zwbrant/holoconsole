@@ -17,10 +17,11 @@ namespace HoloToolkit.Unity.UX
 
         public int CompareTo(Distorter other)
         {
-            if (other == null) {
+            if (other == null)
+            {
                 return 0;
             }
-            
+
             return DistortOrder.CompareTo(other.DistortOrder);
         }
 
@@ -31,13 +32,14 @@ namespace HoloToolkit.Unity.UX
         /// <param name="point"></param>
         /// <param name="strength"></param>
         /// <returns></returns>
-        public Vector3 DistortPoint (Vector3 point, float strength = 1f)
+        public Vector3 DistortPoint(Vector3 point, float strength = 1f)
         {
-            if (!isActiveAndEnabled) {
+            if (!isActiveAndEnabled)
+            {
                 return point;
             }
 
-            strength = Mathf.Clamp01 (strength * DistortStrength);
+            strength = Mathf.Clamp01(strength * DistortStrength);
 
             if (strength <= 0)
             {
@@ -56,7 +58,8 @@ namespace HoloToolkit.Unity.UX
         /// <returns></returns>
         public Vector3 DistortScale(Vector3 scale, float strength = 1f)
         {
-            if (!isActiveAndEnabled) {
+            if (!isActiveAndEnabled)
+            {
                 return scale;
             }
 

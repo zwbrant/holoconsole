@@ -39,7 +39,7 @@ namespace HoloToolkit.Unity
         private void UpdateFps()
         {
             frameCount++;
-            int currentWholeTime = (int) Time.realtimeSinceStartup;
+            int currentWholeTime = (int)Time.realtimeSinceStartup;
             if (currentWholeTime != lastWholeTime)
             {
                 lastWholeTime = currentWholeTime;
