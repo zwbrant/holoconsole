@@ -1,4 +1,5 @@
 ﻿//======= Copyright (c) Valve Corporation, All rights reserved. ===============
+using HoloToolkit.Unity.Buttons;
 using HoloToolkit.Unity.InputModule;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -178,6 +179,10 @@ namespace Valve.VR.Extras
 
             if (e.target != null)
             {
+                var bttn = e.target.gameObject.GetComponent<Button>();
+                if (bttn != null)
+                    bttn.TriggerClicked();
+
                 var args = new InputClickedEventData(EventSystem.current);
                 ExecuteEvents.Execute<IInputClickHandler>(e.target.gameObject, null, (x, y) => x.OnInputClicked(args));
             }

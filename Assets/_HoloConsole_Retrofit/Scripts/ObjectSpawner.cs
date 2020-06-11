@@ -52,4 +52,9 @@ public class ObjectSpawner : MonoBehaviour
         obj.transform.position = SpawnPoint.position;
     }
 
+    public void NotImplemented()
+    {
+        throw new System.NotImplementedException("No platypi found");
+    }
+
 }
