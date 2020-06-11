@@ -1,9 +1,13 @@
 ﻿using GeometricDrag;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class PropellerController : MonoBehaviour
 {
-    [Range(0f, 130f)]
+    public LinearMapping LinearInput;
+    public bool OverrideLinearInput = false;
+
+[Range(0f, 130f)]
     public float Speed = 1f;
     public GlobalWindSource WindSource;
     public ParticleSystem WindParticles;
@@ -18,6 +22,9 @@ public class PropellerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!OverrideLinearInput)
+            Speed = LinearInput.value * 130f;
+
         transform.Rotate((Vector3.right), 10f * Time.deltaTime * Speed);
 
         WindSource.Strength = Speed * .8f;
@@ -34,7 +41,7 @@ public class PropellerController : MonoBehaviour
         float maxLife = tunnelHeight / Speed;
 
         main.startSpeed = Speed * 1.2f;
-        main.startLifetime = maxLife * 10 * (Speed / (130 + 10))  * 1.2f;
+        main.startLifetime = maxLife * 12 * (Speed / (130 + 10))  * 1.4f;
 
         var emission = WindParticles.emission;
         emission.rateOverTime = Speed * .4f;

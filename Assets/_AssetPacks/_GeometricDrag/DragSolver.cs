@@ -172,7 +172,8 @@ namespace GeometricDrag
 
                     Rbody.AddForceAtPosition(result.DragForce * Time.deltaTime * DragMulti, result.ForceOrigin);
 
-                    obtuseness += result.Obtuseness;
+                    if (j != 0)
+                        obtuseness += result.Obtuseness;
 
                     if (DebugForceVectors)
                         Debug.DrawLine(result.ForceOrigin, result.ForceOrigin + result.DragForce * DragMulti, Color.yellow);

@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7347454755825697373}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.118, y: 4.128, z: 2.9339998}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.20108, y: 0.010629781, z: 0.20108}
   m_Children: []
   m_Father: {fileID: 0}
@@ -87,7 +87,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7347454755825697373}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d8790289c4f802845b28128348d5dca4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -101,7 +101,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7347454755825697373}
   serializedVersion: 2
-  m_Mass: 0.001
+  m_Mass: 0.015
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -130,5 +130,5 @@ MonoBehaviour:
   DebugForceVectors: 0
   DebugVelocityVector: 0
   UseSimpleDrag: 0
-  MeshFilter: {fileID: 0}
-  Rbody: {fileID: 0}
+  MeshFilter: {fileID: 7347454755825697368}
+  Rbody: {fileID: 7347454755825697371}
