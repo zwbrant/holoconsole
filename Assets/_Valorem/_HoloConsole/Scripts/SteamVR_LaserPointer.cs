@@ -131,6 +131,8 @@ namespace Valve.VR.Extras
             // start dragging if the target isn't a button
             if (e.target != null && !ExecuteEvents.CanHandleEvent<IInputClickHandler>(e.target.gameObject))
             {
+                if (e.target.name != "TranslateSlider" && e.target.name != "ScaleSlider")
+                    return;
                 DraggedObject = (e.target.name == "TranslateSlider") ? e.target.parent : e.target;
 
                 DraggingPoint.transform.position = e.contactPoint;
@@ -179,7 +181,7 @@ namespace Valve.VR.Extras
 
             if (e.target != null)
             {
-                var bttn = e.target.gameObject.GetComponent<Button>();
+                var bttn = e.target.transform.GetComponentInParent<Button>();
                 if (bttn != null)
                     bttn.TriggerClicked();
 

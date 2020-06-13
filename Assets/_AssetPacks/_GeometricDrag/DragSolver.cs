@@ -2,6 +2,7 @@
 using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
+using Valve.VR;
 using Vec3 = UnityEngine.Vector3;
 
 namespace GeometricDrag
@@ -184,13 +185,21 @@ namespace GeometricDrag
             if (DebugObtuseness)
                 _mesh.colors32 = _colors;
 
-            _nAirForces.Dispose();
-            _nDragResults.Dispose();
+            DisposeTempAllocations();
+        }
+
+        private void DisposeTempAllocations()
+        {
+            if (_nAirForces.IsCreated)
+                _nAirForces.Dispose();
+            if (_nDragResults.IsCreated)
+                _nDragResults.Dispose();
         }
 
         private void OnDisable()
         {
-            _nLocalTris.Dispose();
+            if (_nLocalTris.IsCreated)
+                _nLocalTris.Dispose();
         }
         #endregion
 
@@ -254,6 +263,7 @@ namespace GeometricDrag
             _colors[_triIndices[index + 1]] = c;
             _colors[_triIndices[index + 2]] = c;
         }
+
 
     }
     [System.Serializable]

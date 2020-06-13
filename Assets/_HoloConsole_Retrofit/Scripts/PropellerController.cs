@@ -27,7 +27,7 @@ public class PropellerController : MonoBehaviour
 
         transform.Rotate((Vector3.right), 10f * Time.deltaTime * Speed);
 
-        WindSource.Strength = Speed * .8f;
+        WindSource.Strength = Speed * 1f;
 
         UpdateWindParticles();
     }
@@ -47,6 +47,11 @@ public class PropellerController : MonoBehaviour
         emission.rateOverTime = Speed * .4f;
         
         
+    }
+
+    public void stuff()
+    {
+        FindObjectOfType(typeof(DragSolver));
     }
 
 }

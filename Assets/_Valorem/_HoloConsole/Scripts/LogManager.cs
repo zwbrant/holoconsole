@@ -134,7 +134,7 @@ namespace Valorem.HoloConsole
                     LogColor.b * contrastMulti);
 
             Application.logMessageReceived += LogReceivedHandler;
-            TestLogs(30);
+            //TestLogs(30);
         }
 
         // Update is called once per frame
