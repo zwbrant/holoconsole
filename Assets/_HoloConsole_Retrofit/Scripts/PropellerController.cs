@@ -18,10 +18,17 @@ public class PropellerController : MonoBehaviour
     {
 
     }
-
+    bool showOnce = true;
     // Update is called once per frame
     void Update()
     {
+        if (showOnce && LinearInput.value != 0f)
+        {
+            Debug.Log("Experimental Drag System initialized");
+            showOnce = false;
+        }
+
+
         if (!OverrideLinearInput)
             Speed = LinearInput.value * 130f;
 

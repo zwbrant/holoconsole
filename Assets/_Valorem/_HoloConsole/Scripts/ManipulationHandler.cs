@@ -29,9 +29,11 @@ namespace Valorem.HoloConsole
             //InteractionManager.SourcePressed += HandlePressed;
         }
 
+    #if UNITY_EDITOR
         private void HandlePressed(UnityEngine.XR.WSA.Input.InteractionSourceState state)
         {
         }
+#endif
 
         // Update is called once per frame
         void Update()

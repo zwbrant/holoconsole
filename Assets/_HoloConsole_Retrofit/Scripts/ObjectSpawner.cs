@@ -24,14 +24,12 @@ public class ObjectSpawner : MonoBehaviour
         PopulateArray(ObjPool2, Object2);
         PopulateArray(ObjPool3, Object3);
         PopulateArray(ObjPool4, Object4);
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void SpawnObject1()
@@ -47,7 +45,7 @@ public class ObjectSpawner : MonoBehaviour
 
     public void SpawnObject3()
     {
-        SpawnObjFromPool(ObjPool3);
+        SpawnObjFromPool(ObjPool3, 50);
 
 
     }
@@ -60,7 +58,7 @@ public class ObjectSpawner : MonoBehaviour
 
     public void NotImplemented()
     {
-        throw new System.NotImplementedException();
+        throw new System.NotImplementedException("No platypus prefab found");
     }
 
     public void PopulateArray(GameObject[] array, GameObject prefab)
@@ -75,19 +73,32 @@ public class ObjectSpawner : MonoBehaviour
         }
     }
 
-    public void SpawnObjFromPool(GameObject[] pool)
+    public void SpawnObjFromPool(GameObject[] pool, int count = 1)
     {
-            for (int i = 0; i < pool.Length; i++)
-            {
+        for (int i = 0; i < pool.Length; i += count)
+        {
 
-                if (pool[i].activeSelf)
-                    continue;
-                else
+
+            if (pool[i].activeSelf)
+                continue;
+            else
+            {
+                if (count == 1)
                 {
                     pool[i].SetActive(true);
+
                     return;
                 }
-            }      
+                else
+                {
+                    for (int j = 0; j < count; j++)
+                        pool[i + j].SetActive(true);
+
+                    return;
+                }
+
+            }
+        }
     }
 
     public void ClearAllObjects()

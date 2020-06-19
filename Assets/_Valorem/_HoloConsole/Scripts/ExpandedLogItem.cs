@@ -126,7 +126,7 @@ namespace Valorem.HoloConsole
                     TypeImage.enabled = false;
                     CollapsedText.enabled = false;
                 }
-                float height = Mathf.Lerp(RectTransform.sizeDelta.y, _initialSize.y - 70f, _lerpTimer / .8f);
+                float height = Mathf.Lerp(RectTransform.sizeDelta.y, _initialSize.y - 90f, _lerpTimer / .8f);
                 RectTransform.sizeDelta = new Vector2(RectTransform.sizeDelta.x, height);
                 yield return new WaitForEndOfFrame();
             }
