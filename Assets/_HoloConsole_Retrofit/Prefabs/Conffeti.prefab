@@ -127,7 +127,7 @@ MonoBehaviour:
   EnableBurst: 1
   BatchSize: 32
   DebugObtuseness: 1
-  DebugForceVectors: 0
+  DebugForceVectors: 1
   DebugVelocityVector: 0
   UseSimpleDrag: 0
   MeshFilter: {fileID: 7347454755825697368}

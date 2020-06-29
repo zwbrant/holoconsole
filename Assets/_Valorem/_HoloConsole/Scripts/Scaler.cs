@@ -1,13 +1,11 @@
 ﻿using HoloToolkit.Unity.InputModule;
 using UnityEngine;
-using Valorem.HoloConsole.CustomHoloHands;
 
 namespace Valorem.HoloConsole
 {
     public class Scaler : MonoBehaviour
     {
         public RectTransform ScaleTarget;
-        public HoloHold HoloHold;
 
         private float _multiplier;
 
@@ -35,7 +33,6 @@ namespace Valorem.HoloConsole
             //GestureRecognizer gr = new GestureRecognizer();
             //gr.ManipulationStartedEvent += OnManipulationStarted;
             //gr.ManipulationStartedEvent += OnManipulationUpdated;
-            HoloHold.MovementUpdate += HoldMovementUpdate;
             _multiplier = LogManager.Instance.ScaleSensitivity * .022f;
         }
 

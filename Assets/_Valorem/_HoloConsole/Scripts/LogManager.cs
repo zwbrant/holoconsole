@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Valorem.HoloConsole.CustomHoloHands;
 
 namespace Valorem.HoloConsole
 {
@@ -44,11 +43,9 @@ namespace Valorem.HoloConsole
         public RectTransform ViewPort;
         public TrackCamera CamTracker;
         public Billboard Billboard;
-        public HoloHold Translator;
         public Scaler Scaler;
         public Transform ScrollDummyTransform;
         public ColorStrobe TopBttn;
-        public HoloHoldController HoloHoldController;
         public TabController TabSystem;
         public GameObject PerformanceView;
         public GameObject ConsoleView;
@@ -98,11 +95,7 @@ namespace Valorem.HoloConsole
             if (CamTracker == null) { CamTracker = GetComponent<TrackCamera>(); }
             if (Scaler == null) { Scaler = GetComponentInChildren<Scaler>(); }
             if (TopBttn == null) { TopBttn = GetComponentInChildren<ColorStrobe>(); }
-            if (HoloHoldController == null)
-            {
-                HoloHoldController = Camera.main.GetComponent<HoloHoldController>();
-                //if (HoloHoldController == null) { Debug.LogError("No HoloHoldController found on main camera"); }
-            }
+
             if (TabSystem == null) { TabSystem = GetComponentInChildren<TabController>(); }
             if (PerformanceView == null) { PerformanceView = GameObject.Find("PerformanceView"); }
             if (ConsoleView == null) { ConsoleView = GameObject.Find("ConsoleView"); }
@@ -168,7 +161,6 @@ namespace Valorem.HoloConsole
                 _followCamera = value;
                 RectTransform.pivot = (_followCamera) ? new Vector2(0f, 1f) : new Vector2(.5f, .5f);
                 Scaler.gameObject.SetActive(!_followCamera);
-                Translator.gameObject.SetActive(!_followCamera);
                 TopBttn.gameObject.SetActive(!_followCamera);
                 if (!_followCamera) { TabSystem.ShowTabs(); }
                 else { TabSystem.HideTabs(); }

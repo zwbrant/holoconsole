@@ -2,7 +2,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Valorem.HoloConsole.CustomHoloHands;
 
 namespace Valorem.HoloConsole
 {
@@ -83,7 +82,7 @@ namespace Valorem.HoloConsole
             if (String.IsNullOrEmpty(Condition) && String.IsNullOrEmpty(StackTrace))
                 SetText(CollapsedText.text, "");
             BackgroundImage = GetComponent<Image>();
-            GetComponent<HoloHold>().HoldTransform = LogManager.Instance.ScrollDummyTransform;
+            //GetComponent<HoloHold>().HoldTransform = LogManager.Instance.ScrollDummyTransform;
         }
 
         // Use this for initialization

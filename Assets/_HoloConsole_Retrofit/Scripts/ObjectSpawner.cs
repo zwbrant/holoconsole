@@ -29,7 +29,23 @@ public class ObjectSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            SpawnObject1();
 
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            NotImplemented();
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            SpawnObject2();
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            SpawnObject4();
+
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            SpawnObject3();
+
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+            ClearAllObjects();
     }
 
     public void SpawnObject1()

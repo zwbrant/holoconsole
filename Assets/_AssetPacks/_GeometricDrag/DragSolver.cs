@@ -21,6 +21,8 @@ namespace GeometricDrag
         public int BatchSize = 32;
         public bool DebugObtuseness = true;
         public bool DebugForceVectors = false;
+        public float ForceVectorMulti = .0005f;
+
         public bool DebugVelocityVector = false;
         public bool UseSimpleDrag = false;
         [Header("References")]
@@ -174,10 +176,14 @@ namespace GeometricDrag
                     Rbody.AddForceAtPosition(result.DragForce * Time.deltaTime * DragMulti, result.ForceOrigin);
 
                     if (j != 0)
+                    {
                         obtuseness += result.Obtuseness;
 
-                    if (DebugForceVectors)
-                        Debug.DrawLine(result.ForceOrigin, result.ForceOrigin + result.DragForce * DragMulti, Color.yellow);
+                        if (DebugForceVectors)
+                            Debug.DrawLine(result.ForceOrigin, result.ForceOrigin + result.DragForce * Mathf.Pow(result.DragForce.magnitude, 1f / 8f) * ForceVectorMulti, Color.yellow);
+                    }
+
+
                 }
                 UpdateDebugColors(i, obtuseness);
             }
